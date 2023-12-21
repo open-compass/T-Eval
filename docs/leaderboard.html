@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@100;400&display=swap" rel="stylesheet">
+
+
+<head>
+  <meta charset="UTF-8">
+  <title>T-Eval Leaderboard</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.3/dist/echarts.min.js"></script>
+  <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,600,400italic,600italic,300,300italic' rel='stylesheet' type='text/css'>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+  <!-- favicon.svg -->
+  <!-- <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👍</text></svg>"> -->
+  <!-- <link rel="icon" href="/favicon.svg" /> -->
+  <link rel="icon" href = "https://images.emojiterra.com/google/noto-emoji/unicode-15.1/color/512px/1f6e0.png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css">
+
+  <style>
+    body {
+      font-family: "Titillium Web", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+      font-weight: 300;
+      font-size: 20px;
+      background-color: #FFFFFF;
+      color: #000000;
+    }
+    .paper-btn {
+      position: relative;
+      text-align: center;
+
+      display: inline-block;
+      margin: 8px;
+      padding: 8px 8px;
+
+      border-width: 0;
+      outline: none;
+      border-radius: 2px;
+  
+      background-color: #E0F7FA;
+      color: #01579B !important;
+      font-size: 20px;
+      width: 175px;
+      font-weight: 600;
+    }
+
+    .paper-btn-tapestry {
+      position: relative;
+      text-align: center;
+
+      display: inline-block;
+      margin: 8px;
+      padding: 8px 8px;
+
+      border-width: 0;
+      outline: none;
+      border-radius: 2px;
+  
+      background-color: #5364cc;
+      color: white !important;
+      font-size: 20px;
+      width: 200px;
+      font-weight: 600;
+    }
+
+.paper-btn-parent {
+    display: flex;
+    justify-content: center;
+    margin: 16px 0px;
+}
+
+.paper-btn:hover {
+    opacity: 0.85;
+}
+
+    .paper-btn-parent {
+    display: flex;
+    justify-content: center;
+    margin: 16px 0px;
+    }
+    .paper-btn:hover {
+    opacity: 0.85;
+    }
+    .material-icons {
+    vertical-align: -6px;
+    }
+    .container {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 16px;
+    padding-right: 16px;
+    }
+    .centered-div {
+      width: 70%;
+      margin: 0 auto;  
+    }
+    .bold-blue {
+    color: blue;
+    font-weight: bold;
+    }
+
+    #content {
+      width: 70%;
+    }
+
+    th,
+    td {
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    #notes {
+      font-size: 1em;
+    }
+
+    #notes h3 {
+      margin-top: 1em;
+      font-size: 2em;
+      text-align: center;
+    }
+
+    #notes li {
+      font-weight: 300;
+      margin: 1em;
+    }
+
+    .form-select {
+      font-size: 1em;
+    }
+
+    @media screen and (max-width: 1400px) {
+      body {
+        font-size: 1.6vw;
+      }
+
+      #content {
+        width: 100%;
+      }
+
+      h1 {
+        font-size: 2em;
+      }
+
+      h2 {
+        font-size: 1.6em;
+      }
+
+      h3 {
+        font-size: 1.2em;
+      }
+
+      table {
+        font-size: small;
+      }
+
+      
+    }
+
+
+  </style>
+</head>
+
+<body>
+<div class="container">
+  <div id="content" class="container-fluid d-flex flex-column align-items-center gap-3">
+    <h1 class="text-nowrap mt-5">🏆 T-Eval Leaderboard 🏆</h1>
+    <h3 class="fw-light text-nowrap"><small id="warning">T-Eval evaluates tool utilization capability in multiple dimensions.<br></small></h3>
+    <div style="clear: both">
+      <div class="paper-btn-parent">
+      <a class="paper-btn" href="https://arxiv.org/abs/10000000000000.0000">
+          <span class="material-icons"> description </span> 
+           Paper
+      </a>
+      <!-- <a class="paper-btn" href="https://colab.research.google.com/drive/1jvlzWMc6oo-TH1fYMl6hsOYfrcQj2rEs?usp=sharing">
+          <span class="material-icons"> code </span> 
+           Colab
+      </a>
+      <a class="paper-btn-tapestry" href="https://colab.research.google.com/github/yilundu/reduce_reuse_recycle/blob/main/notebooks/image_tapestry.ipynb">
+          <span class="material-icons"> code </span> 
+           Tapestry Colab
+      </a> -->
+      <a class="paper-btn" href="https://github.com/open-compass/T-Eval">
+          <span class="material-icons"> code </span>
+          Code
+      </a>
+      <a class="paper-btn" href="./index.html">
+          <span class="material-icons"> code </span> 
+           Project Page
+      </a>
+      </div>
+  </div>
+    </div>
+    <div>
+      <div  id="chart" style="width:100%;height:600px;"></div>
+      <div class="container-fluid d-flex flex-row flex-nowrap">
+        <!--<div class="container-fluid d-flex flex-column align-items-center">
+          <label for="plused" class="text-success mb-3">⚡With EvalPlus⚡</label>
+          <table id="plused" class="table table-responsive table-striped table-bordered flex-shrink-1 border border-success border-3"></table>
+        </div> -->
+        <div class="container-fluid d-flex flex-column align-items-center">
+          <label for="origin" class="text-danger mb-3"> T-Eval Scores</label>
+          <table id="origin" class="table table-responsive table-striped table-bordered flex-shrink-1 border border-danger border-3"></table>
+        </div>
+      </div>
+      <div id = "notes">
+        <h4>📝 Notes</h4>
+        <p class="inline-block mt-3">
+          <ol>
+            <li>Models labeled with 🌍 are API-Based models, while others are open-sourced.</li>
+            <li>Feel free to <a href="https://github.com/open-compass/T-Eval/issues/new">file a request</a> to add your models on our leaderboard via open-compass. </li>
+          </ol>
+        </p>
+      </div>
+    </div>
+    <section>
+      <hr>
+      This webpage template was recycled from <a href='https://evalplus.github.io/leaderboard.html'>here</a>.
+      <!-- <center><p><a href='https://accessibility.mit.edu/'><b>Accessibility</b></a></p></center> -->
+    </section>
+  </div>
+
+  <script>
+    const originTable = document.getElementById('origin');
+    const benchmarkRadio = document.getElementById('Benchmark');
+    const chartDom = document.getElementById('chart');
+    
+    var myChart = echarts.init(chartDom);
+
+    var option = {
+      legend: {
+        data: ['Overall*', 'Instruct*']
+      },
+      grid: {
+        left: '1%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+      },
+      xAxis: {
+        name: 'Size',
+        type: 'category',
+        boundaryGap: false,
+        data: [],
+        axisLabel: {
+          formatter: function(value) {
+            return value + 'B';
+          }
+        }
+      },
+      yAxis: {
+        name: 'Overall Score',
+        type: 'value',
+        show: true,
+        nameTextStyle: {
+          align: 'left',
+        },
+        splitLine: {
+          show: true,
+          lineStyle: {
+            type: 'dashed'
+          }
+        }
+      },
+      legend: {
+        data: ['open_source', 'API_based'],
+        itemStyle: {
+          opacity: 1.0
+        },
+      },
+      tooltip: {
+        trigger: 'item',
+        axisPointer: {
+          type: 'cross'
+        }
+      },
+      series: [{
+          name: 'open_source',
+          type: 'scatter',
+          data: [],
+          itemStyle: {
+            color: '#91cc75',
+            opacity: 0.2
+          },
+          emphasis: {
+            focus: 'series'
+          },
+          lineStyle: {
+            width: 2
+          },
+          markLine: {
+            symbol: 'none',
+            emphasis: {
+              label: {
+                position: 'middle',
+                formatter: function(params) {
+                  return params.data.name;
+                }
+              },
+            },
+            data: []
+          }
+        },
+        {
+          name: 'API_based',
+          type: 'scatter',
+          data: [],
+          itemStyle: {
+            color: '#5470c6',
+            opacity: 0.2
+          },
+          emphasis: {
+            focus: 'series'
+          },
+          lineStyle: {
+            width: 2
+          },
+          markLine: {
+            symbol: 'none',
+            emphasis: {
+              label: {
+                position: 'middle',
+                formatter: function(params) {
+                  return params.data.name;
+                }
+              },
+            },
+            data: []
+          }
+        }
+      ]
+    };
+    
+    const theaders = [
+      'Model',
+      'Instruct',
+      'Plan',
+      'Reason',
+      'Retrieve',
+      'Understand',
+      'Review',
+      'Overall',
+    ]
+
+    var data = [];
+
+    var currentUrl = 'scores.csv';
+
+    updateTable(originTable, currentUrl, 'overall');
+    updateChart(currentUrl);
+
+    function clearTable() {
+      originTable.innerHTML = '';
+    }
+
+    function clearChart() {
+      option.xAxis.data = [];
+      option.series[0].data = [];
+      option.series[1].data = [];
+      option.series[0].markLine.data = [];
+      option.series[1].markLine.data = [];
+    }
+
+    function updateTable(table, url, sortColumn) {
+      clearTable();
+      Papa.parse(url, {
+        download: true,
+        header: true,
+        skipEmptyLines: true,
+        complete: function (results) {
+          results.data.sort(function (a, b) {
+            return parseFloat(b[sortColumn]) - parseFloat(a[sortColumn]);
+          });
+          displayTable(table, results.data, sortColumn);
+        }
+      });
+    }
+
+    function updateChart(url) {
+      clearChart();
+      Papa.parse(url, {
+        download: true,
+        header: true,
+        skipEmptyLines: true,
+        complete: function (results) {
+          for(var i = 0; i < results.data.length; i++){
+            var sizeMatch = results.data[i]['Model'].match(/\d+(\.\d+)?B/g);
+            sizeMatch = sizeMatch ? Math.round(parseFloat(sizeMatch[0].replace('B', ''))).toString() : 'N/A';
+            results.data[i]['Size'] = sizeMatch ;
+          }
+          results.data.sort(function (a, b) {
+            if (parseFloat(a['Size']) - parseFloat(b['Size']) < 0) return -1;
+            if (parseFloat(a['Size']) - parseFloat(b['Size']) > 0) return 1;
+            return a['overall'] - b['overall']
+          });
+          displayChart(results.data, url);
+        }
+      });
+    }
+
+    function displayTable(table, data, displayColumn){
+      var thead = document.createElement('thead');
+      var headerRow = document.createElement('tr');
+      // add rank
+      var th = document.createElement('th');
+      th.textContent = '#';
+      headerRow.appendChild(th);
+      // headers
+      theaders.forEach(function (header) {
+        var th = document.createElement('th');
+        th.textContent = header;
+        headerRow.appendChild(th);
+      });
+      thead.appendChild(headerRow);
+      table.appendChild(thead);
+
+      var tbody = document.createElement('tbody');
+      // add rank
+      var rank = 1;
+      data.forEach(function (row) {
+        var dataRow = document.createElement('tr');
+        var rankCell = document.createElement('td');
+        rankCell.textContent = rank;
+        dataRow.appendChild(rankCell);
+        var modelCell = document.createElement('td');
+        if (rank == 1) {
+          modelCell.textContent = '🥇 ';
+        } else if (rank == 2) {
+          modelCell.textContent = '🥈 ';
+        } else if (rank == 3) {
+          modelCell.textContent = '🥉 ';
+        } else {
+          modelCell.textContent = '';
+        }
+        rank++;
+        var modelLink = document.createElement('a');
+        modelLink.href = row['link'];
+        modelLink.textContent = row['Model'];
+        modelLink.classList.add('link-underline-primary');
+        modelLink.classList.add('text-nowrap');
+        modelCell.appendChild(modelLink);
+        modelCell.classList.add('d-flex');
+        modelCell.classList.add('flex-nowrap');
+        var opensourced = row['opensourced'];
+        if (opensourced == 'FALSE') {
+          var promptedSymbol = document.createElement('span');
+          promptedSymbol.textContent = '🌍';
+          modelCell.appendChild(promptedSymbol);
+        }
+        dataRow.appendChild(modelCell);
+        var instructCell = document.createElement('td');
+        instructCell.classList.add('text-danger');
+        instructCell.textContent = row['instruct'];
+        dataRow.appendChild(instructCell);
+        var instructCell = document.createElement('td');
+        instructCell.classList.add('text-danger');
+        instructCell.textContent = row['plan'];
+        dataRow.appendChild(instructCell);
+        var instructCell = document.createElement('td');
+        instructCell.classList.add('text-danger');
+        instructCell.textContent = row['reason'];
+        dataRow.appendChild(instructCell);
+        var instructCell = document.createElement('td');
+        instructCell.classList.add('text-danger');
+        instructCell.textContent = row['retrieve'];
+        dataRow.appendChild(instructCell);
+        var instructCell = document.createElement('td');
+        instructCell.classList.add('text-danger');
+        instructCell.textContent = row['understand'];
+        dataRow.appendChild(instructCell);
+        var instructCell = document.createElement('td');
+        instructCell.classList.add('text-danger');
+        instructCell.textContent = row['review'];
+        dataRow.appendChild(instructCell);
+        var passCell = document.createElement('td');
+        passCell.classList.add('bold-blue');
+        passCell.textContent += row[displayColumn];
+        dataRow.appendChild(passCell);
+        tbody.appendChild(dataRow);
+      });
+      table.appendChild(tbody);
+    }
+
+    function displayChart(data, url) {
+      var sizeSet = new Set();
+      sizeSet.add(0);
+      data.forEach(function(row) {
+        if (row['Size'] != 'N/A') {
+          sizeSet.add(row['Size']);
+        }
+      });
+      sizeSet.add(100);
+      sizeSet.forEach(function(size) {
+        option.xAxis.data.push(size);
+      });
+
+      var maxScore = 0.0;
+      data.forEach(function(row) {
+        if (parseFloat(row['overall']) > maxScore) {
+          maxScore = parseFloat(row['overall']);
+        }
+      });
+      option.yAxis.max = maxScore + 1;
+
+      data.forEach(function(row) {
+        if (row['Size'] == 'N/A') {
+          if (row['opensourced'] == 'FALSE') {
+            option.series[1].markLine.data.push({
+              name: row['Model'],
+              yAxis: row['overall']
+            });
+          } else {
+            option.series[0].markLine.data.push({
+              name: row['Model'],
+              yAxis: row['overall']
+            });
+          }
+        } else {
+          if (row['opensourced'] == 'FALSE') {
+            option.series[1].data.push({
+              name: row['Model'],
+              value: [row['Size'], row['overall']],
+              size: row['Size'],
+            });
+          } else {
+            option.series[0].data.push({
+              name: row['Model'],
+              value: [row['Size'], row['overall']],
+              size: row['Size'],
+            });
+          }
+        }
+      });
+
+      // select the highest model of each size
+      sizeSet.forEach(function(size) {
+        var maxScore = 0.0;
+        var maxScoreIns = 0.0;
+        var maxModel, maxModelIns, align;
+
+        data.forEach(function(row) {
+          if (row['Size'] == size) {
+            if(row['opensourced'] == 'FALSE') {
+              if (parseFloat(row['overall']) > maxScoreIns) {
+                maxScoreIns = parseFloat(row['overall']);
+                maxModelIns = row['Model'];
+              }
+            } else {
+              if (parseFloat(row['overall']) > maxScore) {
+                maxScore = parseFloat(row['overall']);
+                maxModel = row['Model'];
+              }
+            }
+          }
+        });
+        var count = 0;
+        option.series[0].data.forEach(function(row) {
+          if (row['size'] == size) {
+            count += 1;
+            if (count % 2 == 1){
+              offset = [40, 0];
+            } else {
+              offset = [-40, 0];
+            }
+            row.itemStyle = {
+              opacity: 1.0
+            };
+            row.label = {
+              show: true,
+              position: 'top',
+              offset: offset,
+              formatter: function(params) {
+                return params.data.name;
+              },
+              color: 'inherit'
+            };
+          }
+        });
+        option.series[1].data.forEach(function(row) {
+          if (true) {
+            row.itemStyle = {
+              opacity: 1.0
+            };
+            row.label = {
+              show: true,
+              position: 'top',
+              offset: offset,
+              formatter: function(params) {
+                return params.data.name;
+              },
+              color: 'inherit'
+            };
+          }
+        });
+      });
+      option.series[1].markLine.data.forEach(function(row){
+        row.label = {
+          show: true,
+          position: 'middle',
+          formatter: function(params) {
+            return params.data.name;
+          },
+          color: 'inherit'
+        };
+      });
+      option && myChart.setOption(option);
+    }
+
+    window.addEventListener("resize", () => {
+      this.myChart.resize();
+    });
+
+  </script> 
+</div>
+</body>
+
+</html>

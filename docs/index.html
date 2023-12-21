@@ -1,0 +1,601 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+
+<script type="text/javascript" charset="utf-8" src="https://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script> 
+<!---
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+--->
+
+
+<style type="text/css">
+body {
+    font-family: "Titillium Web", "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media screen and (min-width: 980px){
+    body {
+        width: 980px;
+    }
+}
+
+
+h1 {
+    font-weight:300;
+    line-height: 1.15em;
+}
+
+h2 {
+    font-size: 1.75em;
+}
+a:link,a:visited {
+    color: #5364cc;
+    text-decoration: none;
+}
+a:hover {
+    color: #208799;
+}
+h1 {
+    text-align: center;
+}
+h2,h3 {
+    text-align: left;
+}
+
+h1 {
+    font-size: 40px;
+    font-weight: 500;
+}
+h2 {
+    font-weight: 400;
+    margin: 16px 0px 4px 0px;
+}
+h3 {
+    font-weight: 600;
+    margin: 16px 0px 4px 0px;
+}
+
+.paper-title {
+    padding: 1px 0px 1px 0px;
+}
+section {
+    margin: 32px 0px 32px 0px;
+    text-align: justify;
+    clear: both;
+}
+.col-5 {
+     width: 20%;
+     float: left;
+}
+
+.move-down {
+    margin-top:1.2cm;
+}
+
+.col-4 {
+     width: 25%;
+     float: left;
+}
+.col-3 {
+     width: 33%;
+     float: left;
+}
+.col-2 {
+     width: 50%;
+     float: left;
+}
+.col-1 {
+     width: 100%;
+     float: left;
+}
+
+.author-row, .affil-row {
+    font-size: 17px;
+}
+
+.author-row-new { 
+    text-align: center; 
+}
+
+.author-row-new a {
+    display: inline-block;
+    font-size: 17px;
+    padding: 4px;
+}
+
+.author-row-new sup {
+    color: #313436;
+    font-size: 13   px;
+    padding: 4px;
+}
+
+.affiliations-new {
+    font-size: 16px;
+    text-align: center;
+    width: 80%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+.row {
+    margin: 16px 0px 16px 0px;
+}
+.authors {
+    font-size: 26px;
+}
+.affiliatons {
+    font-size: 18px;
+}
+.affil-row {
+    margin-top: 18px;
+}
+.teaser {
+    max-width: 100%;
+}
+.text-center {
+    text-align: center;  
+}
+.screenshot {
+    width: 256px;
+    border: 1px solid #ddd;
+}
+.screenshot-el {
+    margin-bottom: 16px;
+}
+hr {
+    height: 1px;
+    border: 0; 
+    border-top: 1px solid #ddd;
+    margin: 0;
+}
+.material-icons {
+    vertical-align: -6px;
+}
+p {
+    line-height: 1.25em;
+}
+.caption {
+    font-size: 16px;
+    color: #666;
+    margin-top: 4px;
+    margin-bottom: 10px;
+	text-align: left;
+}
+
+
+video {
+    display: block;
+    margin: auto;
+}
+
+
+figure {
+    display: block;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+#bibtex pre {
+    font-size: 14px;
+    background-color: #eee;
+    padding: 16px;
+}
+.blue {
+    color: #2c82c9;
+    font-weight: bold;
+}
+.orange {
+    color: #d35400;
+    font-weight: bold;
+}
+.flex-row {
+    display: flex;
+    flex-flow: row wrap;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.flex-row-center {
+    display: flex;
+    flex-flow: row wrap;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    justify-content: center;
+    text-align: center;
+}
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flex-item {
+  flex: 0 0 50%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.paper-btn-coming-soon {
+    position: relative; 
+    top: 0;
+    left: 0;
+}
+
+.coming-soon {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+}
+
+.center {
+  margin-left: 10.0%;
+  margin-right: 10.0%;
+}
+
+.paper-btn {
+  position: relative;
+  text-align: center;
+
+  display: inline-block;
+  margin: 8px;
+  padding: 8px 8px;
+
+  border-width: 0;
+  outline: none;
+  border-radius: 2px;
+  
+  background-color: #E0F7FA;
+  color: #01579B !important;
+  font-size: 20px;
+  width: 175px;
+  font-weight: 600;
+}
+
+.paper-btn-tapestry {
+  position: relative;
+  text-align: center;
+
+  display: inline-block;
+  margin: 8px;
+  padding: 8px 8px;
+
+  border-width: 0;
+  outline: none;
+  border-radius: 2px;
+  
+  background-color: #5364cc;
+  color: white !important;
+  font-size: 20px;
+  width: 200px;
+  font-weight: 600;
+}
+
+.paper-btn-parent {
+    display: flex;
+    justify-content: center;
+    margin: 16px 0px;
+}
+
+.paper-btn:hover {
+    opacity: 0.85;
+}
+
+.container {
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+.venue {
+    font-size: 23px;
+}
+
+.topnav {
+    background-color: #EEEEEE;
+    overflow: hidden;
+}
+
+.topnav div {
+    max-width: 1070px;
+    margin: 0 auto;
+}
+
+.topnav a {
+    display: inline-block;
+    color: black;
+    text-align: center;
+    vertical-align: middle;
+    padding: 16px 16px;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.topnav img {
+    padding: 2px 0px;
+    width: 100%;
+    margin: 0.2em 0px 0.3em 0px;
+    vertical-align: middle;
+}
+
+pre {
+    font-size: 0.9em;
+    padding-left: 7px;
+    padding-right: 7px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border-radius: 3px;
+    background-color: rgb(235, 235, 235);
+    overflow-x: auto;
+}
+
+.download-thumb {
+    display: flex;
+}
+
+@media only screen and (max-width: 620px) {
+    .download-thumb {
+        display: none;
+    }
+}
+
+.paper-stuff {
+    width: 50%;
+    font-size: 20px;
+}
+
+@media only screen and (max-width: 620px) {
+    .paper-stuff {
+        width: 100%;
+    }
+}
+* {
+  box-sizing: border-box;
+}
+
+.column {
+  text-align: center;
+  float: left;
+  width: 16.666%;
+  padding: 5px;
+}
+.column3 {
+  text-align: center;
+  float: left;
+  width: 33.333%;
+  padding: 5px;
+}
+.column4 {
+  text-align: center;
+  float: left;
+  width: 50%;
+  padding: 5px;
+}
+.column5 {
+  text-align: center;
+  float: left;
+  width: 20%;
+  padding: 5px;
+}
+.column10 {
+  text-align: center;
+  float: left;
+  width: 10%;
+  padding: 5px;
+}
+.border-right {
+    border-right: 1px solid black;
+}
+.border-bottom{
+    border-bottom: 1px solid black;
+}
+
+
+.row-center {
+    margin: 16px 0px 16px 0px;
+    text-align: center;
+}
+
+/* Clearfix (clear floats) */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+.figure-img {
+  margin-bottom: 0.5rem;
+  line-height: 1;
+}
+
+.rounded-circle {
+  border-radius: 50% !important;
+}
+
+/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 500px) {
+  .column {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 500px) {
+  .column3 {
+    width: 100%;
+  }
+}
+
+</style>
+
+<script type="text/javascript"></script>
+    <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,600,400italic,600italic,300,300italic' rel='stylesheet' type='text/css'>
+    <head>
+        <title> T-Eval: Evaluating the Tool Utilization Capability Step by Step </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta property="og:description" content="A comprehensive tool utilization benchmark"/>
+        <link href="https://fonts.googleapis.com/css2?family=Material+Icons" rel="stylesheet">
+        <link rel="icon" href = "https://images.emojiterra.com/google/noto-emoji/unicode-15.1/color/512px/1f6e0.png">
+    </head>
+
+ <body>
+
+<div class="container">
+    <div class="paper-title">
+    <h1> 
+        T-Eval: Evaluating the Tool Utilization Capability<br> Step by Step
+    </div>
+
+    <div id="authors">
+        <center>
+            <div class="author-row-new">
+                <a href="https://lovesnowbest.site/">Zehui Chen<sup>1,2*</sup></a>,
+                <a href="https://stiglidu.github.io/">Weihua Du<sup>3,2*</sup></a>,
+                <a href="https://zhangwenwei.cn/">Wenwei Zhang<sup>2</sup></a>,
+                Kuikun Liu<sup>2</sup>, Jiangning Liu<sup>2</sup>, Miao Zheng<sup>2</sup>, Jingming Zhuo<sup>4,2</sup>,<br>
+                <a href="https://www.zhangsongyang.com/">Songyang Zhang<sup>2</sup></a>,
+                <a href="http://dahua.site/">Dahua Lin<sup>2</sup></a>,
+                <a href="https://chenkai.site/">Kai Chen<sup>2†</sup></a>
+                <a href="https://scholar.google.co.uk/citations?user=r6CvuOUAAAAJ&hl=en">Feng Zhao<sup>1†</sup></a>,
+            </div>
+        </center>
+        <center>
+        <div class="affiliations">
+            <span><sup>1</sup> University of Science and Technology of China</span>
+            <span><sup>2</sup> Shanghai AI Laboratory</span>
+            <span><sup>3</sup> Tsinghua University</span>
+            <span><sup>4</sup> Jilin University</span>
+        </div>
+
+        <!-- <div class="affil-row">
+            <div class="venue text-center"><b>NeurlIPS 2023 </b></div>
+        </div> -->
+
+        </center>
+
+        <div style="clear: both">
+            <div class="paper-btn-parent">
+            <a class="paper-btn" href="https://arxiv.org/abs/10000000000000.0000">
+                <span class="material-icons"> description </span> 
+                 Paper
+            </a>
+            <!-- <a class="paper-btn" href="https://colab.research.google.com/drive/1jvlzWMc6oo-TH1fYMl6hsOYfrcQj2rEs?usp=sharing">
+                <span class="material-icons"> code </span> 
+                 Colab
+            </a>
+            <a class="paper-btn-tapestry" href="https://colab.research.google.com/github/yilundu/reduce_reuse_recycle/blob/main/notebooks/image_tapestry.ipynb">
+                <span class="material-icons"> code </span> 
+                 Tapestry Colab
+            </a> -->
+            <a class="paper-btn" href="https://github.com/open-compass/T-Eval">
+                <span class="material-icons"> code </span>
+                Code
+            </a>
+            <a class="paper-btn" href="./leaderboard.html">
+                <span class="material-icons"> code </span> 
+                 Leaderboard
+            </a>
+            </div>
+        </div>
+    </div>
+    <section id="abstract"/>
+        <h2 style="text-align: center;">Abstract</h2>
+        <div class="flex-row" style="width: 75%; margin: 0 auto;">
+            <p>
+                Large language models (LLM) have achieved remarkable performance on various NLP tasks and are augmented by tools for broader applications. Yet, how to evaluate and analyze the tool utilization capability of LLMs is still under-explored. In contrast to previous works that evaluate models holistically, we comprehensively decompose the tool utilization into multiple sub-processes, including instruction following, planning, reasoning, retrieval, understanding, and review. Based on that, we further introduce <b>T-Eval</b> to evaluate the tool-utilization capability step by step. <b>T-Eval</b> disentangles the tool utilization evaluation into several sub-domains along model capabilities, facilitating the inner understanding of both holistic and isolated competency of LLMs. We conduct extensive experiments on <b>T-Eval</b> and in-depth analysis of various LLMs. <b>T-Eval</b> not only exhibits consistency with the outcome-oriented evaluation but also provides a more fine-grained analysis of the capabilities of LLMs, providing a new perspective in LLM evaluation on tool-utilization ability.
+            </p>
+        </div>
+    </section>
+    <section id="teaser-image">
+        <hr>
+        <center>
+            <!-- <figure>
+                <video class="centered" width="80%" autoplay loop muted playsinline class="video-background " >
+                    <source src="materials/teaser.m4v" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </figure> -->
+            <figure>
+                <a>
+                    <img width="95%" src="figure/teaser_v6.png"> 
+                </a>
+                <p class="caption", style="text-align: center;">
+                    Figure 1. Overview of <b>T-Eval</b>.
+                </p>
+            </figure>
+        </center>
+    </section>
+
+    <section id="evaluation protocol"/>
+        <h2 style="text-align: center;">Evaluation Protocol</h2>
+        <div class="flex-row">
+            <p>
+                Tool utilization with LLMs touches upon multiple dimensions of capabilities. We deconstruct the tool-calling process into several key aspects, as depicted in Fig. 1. Initially, solving complex real-world problems frequently requires a multi-step approach to tool calling. This requires a robust <b>planning</b> ability (Fig. 1(a)) to develop a strategy for tool calling that guides subsequent actions.
+            </p>
+            <p>
+                The contexts in which tools are utilized can be intricate, and thus strong <b>reasoning</b> abilities (Fig. 1(b)) are essential to generating logical thoughts for the next steps. After generating a thought, selecting the appropriate tools from a given list demands effective <b>retrieval</b> skills (Fig. 1(c)). Additionally, integrating the correct parameters requires the <b>understanding</b> ability (Fig. 1(d)) to interpret tool documentation and corresponding thoughts. Finally, executing the tool-calling action mandates adept <b>instruction following</b> skills (Fig. 1(e)) to formulate precise requests for APIs. Each tool call executed by LLM must be evaluated to ensure the response meets the intended objective. This crucial evaluation is named the <b>review</b> ability (Fig. 1(f)). 
+            </p>
+            <p>
+                In summary, <b>T-Eval</b> takes the six ability dimensions as mentioned above (<b>planning, reason, retrieve, understand, instruct,</b> and <b>review</b>) into consideration, measuring not only the overall performance of tool-utilization but also detailed scores.
+            </p>
+        </div>
+    </section>
+
+    <section id="data generation pipeline image">
+        <hr>
+        <center>
+            <!-- <figure>
+                <video class="centered" width="80%" autoplay loop muted playsinline class="video-background " >
+                    <source src="materials/teaser.m4v" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </figure> -->
+            <figure>
+                <a>
+                    <img width="95%" src="figure/anno_framework_v2.png"> 
+                </a>
+                <p class="caption", style="text-align: center;">
+                    Figure 2. the data generation pipeline.
+                </p>
+            </figure>
+        </center>
+    </section> 
+    
+    <section id="data generation pipeline"/>
+    <h2 style="text-align: center;">Data Generation Pipeline</h2>
+    <div class="flex-row">
+        <p>
+        The construction of <b>T-Eval</b> consists of three main phases: <b>tool collection</b>, <b>instruction generation</b>, and <b>golden solution annotation</b>. The overview of the construction is shown in Fig. 2. We follow two principles during the collection process:
+        </p>
+        <p class="inline-block mt-3">
+            <ol>
+              <li><b>High Availability and Usage Rate:</b> Considering that <b>T-Eval</b> is expected to cover most daily and practical use cases, we carefully select 1 ~ 2 tools for each specific domain, including Research, Travel, Entertainment, Web, Life, and Financials, resulting in 15 tools as our basic tool set.</li>
+              <li><b>Complete Documentations:</b> To reduce the failure of tool-calling cases caused by inadequate tool descriptions, which focus the evaluation attention on pure LLM abilities, we manually generate high-quality and detailed tool documentation for each tool.</li>
+            </ol>
+        </p>
+    </section>
+
+    <section id="result"/>
+    <hr>
+    <h2 style="text-align: center;">Result</h2>
+    <div class="flex-row-center">
+        <p>
+        You can find the newest leaderboard of our T-Eval benchmark <a href="./leaderboard.html">Here</a>.
+        </p>
+        <br>
+    </section>   
+
+    <section>
+        <hr>
+        This webpage template was recycled from <a href='https://nv-tlabs.github.io/LION/'>here</a>.
+        <!-- <center><p><a href='https://accessibility.mit.edu/'><b>Accessibility</b></a></p></center> -->
+    </section>
+
+</div>
+</body>
+</html>
