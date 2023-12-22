@@ -2,7 +2,7 @@ from collections import defaultdict
 import json
 from numpy import mean
 from mmengine import load
-from t_eval.utils.format_load import format_load
+from teval.utils.format_load import format_load
 # import evaluate
 import itertools
 import networkx as nx
@@ -12,7 +12,7 @@ import json
 import re
 from tqdm import tqdm
 
-from t_eval.schema import ResponseDataSample
+from teval.schema import ResponseDataSample
 from sentence_transformers import SentenceTransformer, util
 
 

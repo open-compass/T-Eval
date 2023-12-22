@@ -2,9 +2,9 @@ from collections import defaultdict
 import json
 from mmengine import load
 
-from t_eval.utils.template import parse_string
-from t_eval.utils.format_load import format_load
-from t_eval.schema import ResponseDataSample
+from teval.utils.template import parse_string
+from teval.utils.format_load import format_load
+from teval.schema import ResponseDataSample
 import ast
 import numpy as np
 

@@ -1,4 +1,4 @@
-import t_eval.evaluators as evaluator_factory
+import teval.evaluators as evaluator_factory
 from lagent.llms.huggingface import HFTransformerCasualLM
 from lagent.llms.openai import GPTAPI
 import argparse

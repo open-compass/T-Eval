@@ -12,8 +12,8 @@ import re
 from tqdm import tqdm
 import ast
 
-from t_eval.schema import ResponseDataSample
-from t_eval.utils.format_load import format_load
+from teval.schema import ResponseDataSample
+from teval.utils.format_load import format_load
 from sentence_transformers import SentenceTransformer, util
 from termcolor import colored
 

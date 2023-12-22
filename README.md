@@ -50,7 +50,7 @@ python test.py --model_type gpt-4-1106-preview --resume --out_name instruct_gpt-
 
 ## 📊 Benchmark Results
 
-More detailed and comprehensive benchmark results can refer to 🏆 [T-Eval official leaderboard]()!
+More detailed and comprehensive benchmark results can refer to 🏆 [T-Eval official leaderboard](https://open-compass.github.io/T-Eval/leaderboard.html)!
 
 <div>
 <center>
