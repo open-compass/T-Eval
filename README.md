@@ -27,8 +27,8 @@ Zehui Chen<sup>&spades;</sup>, Weihua Du<sup>&spades;</sup>, Wenwei Zhang<sup>&s
 
 ## 🚀 What's New
 
-- **[2023.12.21]** Paper available on [Arxiv](https://arxiv.org/abs/2312.14033). 🔥🔥🔥
-- **[2023.12.20]** Release the test scripts and data for T-Eval. 🎉🎉🎉
+- **[2023.12.22]** Paper available on [Arxiv](https://arxiv.org/abs/2312.14033). 🔥🔥🔥
+- **[2023.12.21]** Release the test scripts and data for T-Eval. 🎉🎉🎉
 
 ## 🛠️ Preparations
 
@@ -69,9 +69,7 @@ If you find this project useful in your research, please consider cite:
       title={T-Eval: Evaluating the Tool Utilization Capability Step by Step}, 
       author={Zehui Chen and Weihua Du and Wenwei Zhang and Kuikun Liu and Jiangning Liu and Miao Zheng and Jingming Zhuo and Songyang Zhang and Dahua Lin and Kai Chen and Feng Zhao},
       year={2023},
-      eprint={2312.14033},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL}
+      eprint={2312.14033}
 }
 ```
 
