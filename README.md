@@ -1,13 +1,13 @@
 # T-Eval: Evaluating the Tool Utilization Capability Step by Step
 
-[![arXiv](https://img.shields.io/badge/arXiv-xxxx.xxxxx-b31b1b.svg)](https://arxiv.org/abs/xxxx.xxxxx)
+[![arXiv](https://img.shields.io/badge/arXiv-2312.14033-b31b1b.svg)](https://arxiv.org/abs/2312.14033)
 [![license](https://img.shields.io/github/license/InternLM/opencompass.svg)](./LICENSE)
 
 ## ✨ Introduction  
 
-This is an evaluation harness for the benchmark described in [T-Eval: Evaluating the Tool Utilization Capability Step by Step](). 
+This is an evaluation harness for the benchmark described in [T-Eval: Evaluating the Tool Utilization Capability Step by Step](https://arxiv.org/abs/2312.14033). 
 
-[[Paper](https://arxiv.org/abs/xxxx.xxxxx)]
+[[Paper](https://arxiv.org/abs/2312.14033)]
 [[Project Page](https://open-compass.github.io/T-Eval/)]
 [[LeaderBoard](https://open-compass.github.io/T-Eval/leaderboard.html)]
 
@@ -27,7 +27,7 @@ Zehui Chen<sup>&spades;</sup>, Weihua Du<sup>&spades;</sup>, Wenwei Zhang<sup>&s
 
 ## 🚀 What's New
 
-- **[2023.12.21]** Paper available on [Arxiv](). 🔥🔥🔥
+- **[2023.12.21]** Paper available on [Arxiv](https://arxiv.org/abs/2312.14033). 🔥🔥🔥
 - **[2023.12.20]** Release the test scripts and data for T-Eval. 🎉🎉🎉
 
 ## 🛠️ Preparations
@@ -65,6 +65,14 @@ T-Eval is built with [Lagent](https://github.com/InternLM/lagent) and [OpenCompa
 
 If you find this project useful in your research, please consider cite:
 ```
+@misc{chen2023teval,
+      title={T-Eval: Evaluating the Tool Utilization Capability Step by Step}, 
+      author={Zehui Chen and Weihua Du and Wenwei Zhang and Kuikun Liu and Jiangning Liu and Miao Zheng and Jingming Zhuo and Songyang Zhang and Dahua Lin and Kai Chen and Feng Zhao},
+      year={2023},
+      eprint={2312.14033},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
+}
 ```
 
 ## 💳 License
