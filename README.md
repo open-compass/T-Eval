@@ -43,7 +43,7 @@ $ pip install requirements.txt
 
 We support both API-based models and HuggingFace models via [Lagent](https://github.com/InternLM/lagent).
 
-###  API-models
+### 🤖 API Models
 
 1. Set your OPENAI key in your environment.
 ```bash
@@ -57,7 +57,7 @@ sh test_all.sh gpt-4-1106-preview
 python test.py --model_type gpt-4-1106-preview --resume --out_name instruct_gpt-4-1106-preview.json --out_dir data/work_dirs/ --dataset_path data/instruct_v1.json --eval instruct --prompt_type json
 ```
 
-### HuggingFace Models
+### 🤗 HuggingFace Models
 
 1. Download the huggingface model to your local path.
 2. Modify the `meta_template` json according to your tested model.
@@ -84,26 +84,33 @@ T-Eval adopts multi-conversation style evaluation to gauge the model. The format
     }
 ]
 ```
-where `role` can be ['system', 'user', 'assistant'], and `content` must be in string format. Before infering it by a LLM, we need to construct it into a raw string format via `meta_template`. A `meta_template` sample for InternLM can be:
+where `role` can be ['system', 'user', 'assistant'], and `content` must be in string format. Before infering it by a LLM, we need to construct it into a raw string format via `meta_template`. A `meta_template` sample for InternLM is provided at [meta_template.py](teval/utils/meta_template.py):
 ```python
-dict(role='system', begin='<|System|>:', end='\n'),
-dict(role='user', begin='<|User|>:', end='\n'),
-dict(
-    role='assistant',
-    begin='<|Bot|>:',
-    end='<eoa>\n',
-    generate=True)
+[
+    dict(role='system', begin='<|System|>:', end='\n'),
+    dict(role='user', begin='<|User|>:', end='\n'),
+    dict(
+        role='assistant',
+        begin='<|Bot|>:',
+        end='<eoa>\n',
+        generate=True)
+]
 ```
-You need to specify the `begin` and `end` token based on your tested huggingface model. We will provide some samples for reference. As for OpenAI model, we will handle that for you.
+You need to specify the `begin` and `end` token based on your tested huggingface model at [meta_template.py](teval/utils/meta_template.py) and specify the `meta_template` args in `test.py`, same as the name you set in the `meta_template.py`. As for OpenAI model, we will handle that for you.
+
 
 ## 📊 Benchmark Results
 
-More detailed and comprehensive benchmark results can refer to 🏆 [T-Eval official leaderboard](https://open-compass.github.io/T-Eval/leaderboard.html)!
+More detailed and comprehensive benchmark results can refer to 🏆 [T-Eval official leaderboard](https://open-compass.github.io/T-Eval/leaderboard.html) !
 
 <div>
 <center>
 <img src="figs/teval_results.png">
 </div>
+
+### ✉️ Submit Your Results
+
+You can submit your inference results (via running test.py) to this [email](lovesnow@mail.ustc.edu.cn). We will run your predictions and update the results in our leaderboard.
 
 ## ❤️ Acknowledgements
 
@@ -113,11 +120,11 @@ T-Eval is built with [Lagent](https://github.com/InternLM/lagent) and [OpenCompa
 
 If you find this project useful in your research, please consider cite:
 ```
-@misc{chen2023teval,
-      title={T-Eval: Evaluating the Tool Utilization Capability Step by Step}, 
-      author={Zehui Chen and Weihua Du and Wenwei Zhang and Kuikun Liu and Jiangning Liu and Miao Zheng and Jingming Zhuo and Songyang Zhang and Dahua Lin and Kai Chen and Feng Zhao},
-      year={2023},
-      eprint={2312.14033}
+@article{chen2023t,
+  title={T-Eval: Evaluating the Tool Utilization Capability Step by Step},
+  author={Chen, Zehui and Du, Weihua and Zhang, Wenwei and Liu, Kuikun and Liu, Jiangning and Zheng, Miao and Zhuo, Jingming and Zhang, Songyang and Lin, Dahua and Chen, Kai and others},
+  journal={arXiv preprint arXiv:2312.14033},
+  year={2023}
 }
 ```
 

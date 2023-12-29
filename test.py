@@ -1,4 +1,5 @@
 import teval.evaluators as evaluator_factory
+from teval.utils.meta_template import meta_template_dict
 from lagent.llms.huggingface import HFTransformerCasualLM
 from lagent.llms.openai import GPTAPI
 import argparse
@@ -20,6 +21,7 @@ def parse_args():
     parser.add_argument('--eval', type=str, choices=['instruct', 'reason', 'plan', 'retrieve', 'review', 'understand'])
     parser.add_argument('--test_num', type=int, default=-1, help='number of samples to test, -1 means all')
     parser.add_argument('--prompt_type', type=str, default='json', choices=['json', 'str'])
+    parser.add_argument('--meta_template', type=str, default='internlm')
     args = parser.parse_args()
     return args
 
@@ -71,7 +73,8 @@ if __name__ == '__main__':
     # elif args.model_type.startswith('claude'):
     #     llm = ClaudeAPI(args.model_type)
     elif args.model_type == 'hf':
-        llm = HFTransformerCasualLM(args.hf_path)
+        meta_template = meta_template_dict.get(args.meta_template)
+        llm = HFTransformerCasualLM(args.hf_path, meta_template=meta_template)
     dataset, tested_num, total_num = load_dataset(args.dataset_path, args.out_dir, args.resume, tmp_folder_name=tmp_folder_name)
     if args.test_num == -1:
         test_num = max(total_num - tested_num, 0)
