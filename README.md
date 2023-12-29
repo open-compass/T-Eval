@@ -39,14 +39,62 @@ $ pip install lagent
 $ pip install requirements.txt
 ```
 
-## 🎮 Usage
+##  🛫️ Get Started
 
+We support both API-based models and HuggingFace models via [Lagent](https://github.com/InternLM/lagent).
+
+###  API-models
+
+1. Set your OPENAI key in your environment.
+```bash
+export OPENAI_API_KEY=xxxxxxxxx
+```
+2. Run the model with the following scripts
 ```bash
 # test all data at once
 sh test_all.sh gpt-4-1106-preview
 # test for Instruct only
 python test.py --model_type gpt-4-1106-preview --resume --out_name instruct_gpt-4-1106-preview.json --out_dir data/work_dirs/ --dataset_path data/instruct_v1.json --eval instruct --prompt_type json
 ```
+
+### HuggingFace Models
+
+1. Download the huggingface model to your local path.
+2. Modify the `meta_template` json according to your tested model.
+3. Run the model with the following scripts
+```bash
+# test all data at once
+sh test_all.sh hf $HF_PATH
+# test for Instruct only
+python test.py --model_type hf --hf_path $HF_PATH --resume --out_name instruct_{hf_model_name}.json --out_dir data/work_dirs/ --dataset_path data/instruct_v1.json --eval instruct --prompt_type json
+```
+
+## 🔌 Protocols
+
+T-Eval adopts multi-conversation style evaluation to gauge the model. The format of our saved prompt is as follows:
+```python
+[
+    {
+        "role": "system",
+        "content": "You have access to the following API:\n{'name': 'AirbnbSearch.search_property_by_place', 'description': 'This function takes various parameters to search properties on Airbnb.', 'required_parameters': [{'name': 'place', 'type': 'STRING', 'description': 'The name of the destination.'}], 'optional_parameters': [], 'return_data': [{'name': 'property', 'description': 'a list of at most 3 properties, containing id, name, and address.'}]}\nPlease generate the response in the following format:\ngoal: goal to call this action\n\nname: api name to call\n\nargs: JSON format api args in ONLY one line\n"
+    },
+    {
+        "role": "user",
+        "content": "Call the function AirbnbSearch.search_property_by_place with the parameter as follows: 'place' is 'Berlin'."
+    }
+]
+```
+where `role` can be ['system', 'user', 'assistant'], and `content` must be in string format. Before infering it by a LLM, we need to construct it into a raw string format via `meta_template`. A `meta_template` sample for InternLM can be:
+```python
+dict(role='system', begin='<|System|>:', end='\n'),
+dict(role='user', begin='<|User|>:', end='\n'),
+dict(
+    role='assistant',
+    begin='<|Bot|>:',
+    end='<eoa>\n',
+    generate=True)
+```
+You need to specify the `begin` and `end` token based on your tested huggingface model. We will provide some samples for reference. As for OpenAI model, we will handle that for you.
 
 ## 📊 Benchmark Results
 
