@@ -1,6 +1,6 @@
 echo "model_type: $1"
 
-number_of_data=1
+number_of_data=-1
 
 if [ -z "$2" ]; then
     hf_path="."
