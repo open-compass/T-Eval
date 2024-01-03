@@ -1,2 +1,6 @@
+lagent
+mmengine
 networkx
 bert_score
+sentence_transformers
+evaluate

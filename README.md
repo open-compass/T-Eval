@@ -35,7 +35,6 @@ Zehui Chen<sup>&spades;</sup>, Weihua Du<sup>&spades;</sup>, Wenwei Zhang<sup>&s
 ```bash
 $ git clone https://github.com/open-compass/T-Eval.git
 $ cd T-Eval
-$ pip install lagent
 $ pip install requirements.txt
 ```
 
@@ -64,9 +63,9 @@ python test.py --model_type gpt-4-1106-preview --resume --out_name instruct_gpt-
 3. Run the model with the following scripts
 ```bash
 # test all data at once
-sh test_all.sh hf $HF_PATH
+sh test_all.sh hf $HF_PATH $HF_MODEL_NAME
 # test for Instruct only
-python test.py --model_type hf --hf_path $HF_PATH --resume --out_name instruct_{hf_model_name}.json --out_dir data/work_dirs/ --dataset_path data/instruct_v1.json --eval instruct --prompt_type json
+python test.py --model_type hf --hf_path $HF_PATH --resume --out_name instruct_$HF_MODEL_NAME.json --out_dir data/work_dirs/ --dataset_path data/instruct_v1.json --eval instruct --prompt_type json --model_display_name $HF_MODEL_NAME
 ```
 
 ## 🔌 Protocols

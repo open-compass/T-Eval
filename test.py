@@ -14,6 +14,8 @@ def parse_args():
     parser.add_argument('--dataset_path', type=str, default='data/instruct_v1.json')
     parser.add_argument('--model_type', type=str, choices=['gpt-3.5-turbo-16k', 'gpt-4-1106-preview', 'hf', 'claude-2.1', 'chat-bison-001'], default='gpt-3.5-turbo-16k')
     # hf means huggingface, if you want to use huggingface model, you should specify the path of the model
+    parser.add_argument('--model_display_name', type=str, default="")
+    # if not set, it will be the same as the model type, only inference the output_name of the result
     parser.add_argument('--resume', action='store_true')
     parser.add_argument('--out_name', type=str, default='tmp.json')
     parser.add_argument('--out_dir', type=str, default="work_dirs/")
@@ -87,7 +89,13 @@ if __name__ == '__main__':
     mmengine.dump(prediction, os.path.join(args.out_dir, args.out_name))
 
     if args.eval:
-        json_path = os.path.join(args.out_dir, args.model_type + '_' + str(args.test_num) + '.json')
+        if args.model_display_name == "":
+            model_display_name = args.model_type
+        else:
+            model_display_name = args.model_display_name
+        print(model_display_name)
+        os.makedirs(args.out_dir, exist_ok=True)
+        json_path = os.path.join(args.out_dir, model_display_name + '_' + str(args.test_num) + '.json')
         if os.path.exists(json_path):
             results = mmengine.load(json_path)
         else:
@@ -106,4 +114,5 @@ if __name__ == '__main__':
         eval_results = evaluator.evaluate()
         print(eval_results)
         results[args.eval + '_' + args.prompt_type] = eval_results
+        print(json_path)
         mmengine.dump(results, json_path)
