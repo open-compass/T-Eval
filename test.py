@@ -16,7 +16,7 @@ def parse_args():
     # hf means huggingface, if you want to use huggingface model, you should specify the path of the model
     parser.add_argument('--resume', action='store_true')
     parser.add_argument('--out_name', type=str, default='tmp.json')
-    parser.add_argument('--out_dir', type=str, default="data/work_dirs/")
+    parser.add_argument('--out_dir', type=str, default="work_dirs/")
     parser.add_argument('--hf_path', type=str, help="path to huggingface model")
     parser.add_argument('--eval', type=str, choices=['instruct', 'reason', 'plan', 'retrieve', 'review', 'understand'])
     parser.add_argument('--test_num', type=int, default=-1, help='number of samples to test, -1 means all')
