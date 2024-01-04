@@ -20,7 +20,7 @@ def parse_args():
     parser.add_argument('--out_name', type=str, default='tmp.json')
     parser.add_argument('--out_dir', type=str, default="work_dirs/")
     parser.add_argument('--hf_path', type=str, help="path to huggingface model")
-    parser.add_argument('--eval', type=str, choices=['instruct', 'reason', 'plan', 'retrieve', 'review', 'understand'])
+    parser.add_argument('--eval', type=str, choices=['instruct', 'reason', 'plan', 'retrieve', 'review', 'understand', 'rru'])
     parser.add_argument('--test_num', type=int, default=-1, help='number of samples to test, -1 means all')
     parser.add_argument('--prompt_type', type=str, default='json', choices=['json', 'str'])
     parser.add_argument('--meta_template', type=str, default='internlm')
@@ -69,31 +69,30 @@ if __name__ == '__main__':
     os.makedirs(args.out_dir, exist_ok=True)
     tmp_folder_name = os.path.splitext(args.out_name)[0]
     os.makedirs(os.path.join(args.out_dir, tmp_folder_name), exist_ok=True)
-    if args.model_type.startswith('gpt'):
-        # if you want to use GPT, please refer to lagent for how to pass your key to GPTAPI class
-        llm = GPTAPI(args.model_type)
-    # elif args.model_type.startswith('claude'):
-    #     llm = ClaudeAPI(args.model_type)
-    elif args.model_type == 'hf':
-        meta_template = meta_template_dict.get(args.meta_template)
-        llm = HFTransformerCasualLM(args.hf_path, meta_template=meta_template)
+    # if args.model_type.startswith('gpt'):
+    #     # if you want to use GPT, please refer to lagent for how to pass your key to GPTAPI class
+    #     llm = GPTAPI(args.model_type)
+    # # elif args.model_type.startswith('claude'):
+    # #     llm = ClaudeAPI(args.model_type)
+    # elif args.model_type == 'hf':
+    #     meta_template = meta_template_dict.get(args.meta_template)
+    #     llm = HFTransformerCasualLM(args.hf_path, meta_template=meta_template)
     dataset, tested_num, total_num = load_dataset(args.dataset_path, args.out_dir, args.resume, tmp_folder_name=tmp_folder_name)
     if args.test_num == -1:
         test_num = max(total_num - tested_num, 0)
     else:
         test_num = max(min(args.test_num - tested_num, total_num - tested_num), 0)
     print(f"Tested {tested_num} samples, left {test_num} samples, total {total_num} samples")
-    prediction = infer(dataset, llm, args.out_dir, tmp_folder_name=tmp_folder_name, test_num=test_num)
+    # prediction = infer(dataset, llm, args.out_dir, tmp_folder_name=tmp_folder_name, test_num=test_num)
     # dump prediction to out_dir
     output_file_path = os.path.join(args.out_dir, args.out_name)
-    mmengine.dump(prediction, os.path.join(args.out_dir, args.out_name))
+    # mmengine.dump(prediction, os.path.join(args.out_dir, args.out_name))
 
     if args.eval:
         if args.model_display_name == "":
             model_display_name = args.model_type
         else:
             model_display_name = args.model_display_name
-        print(model_display_name)
         os.makedirs(args.out_dir, exist_ok=True)
         json_path = os.path.join(args.out_dir, model_display_name + '_' + str(args.test_num) + '.json')
         if os.path.exists(json_path):
@@ -106,7 +105,8 @@ if __name__ == '__main__':
             review="ReviewEvaluator",
             reason="ReasonRetrieveUnderstandEvaluator",
             retrieve="ReasonRetrieveUnderstandEvaluator",
-            understand="ReasonRetrieveUnderstandEvaluator"
+            understand="ReasonRetrieveUnderstandEvaluator",
+            rru="ReasonRetrieveUnderstandEvaluator"
         )
         evaluator_class = getattr(evaluator_factory, eval_mapping[args.eval])
         evaluator = evaluator_class(output_file_path, default_prompt_type=args.prompt_type, eval_type = args.eval)
@@ -114,5 +114,5 @@ if __name__ == '__main__':
         eval_results = evaluator.evaluate()
         print(eval_results)
         results[args.eval + '_' + args.prompt_type] = eval_results
-        print(json_path)
+        print(f"Writing Evaluation Results to {json_path}")
         mmengine.dump(results, json_path)

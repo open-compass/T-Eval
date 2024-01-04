@@ -68,6 +68,11 @@ sh test_all.sh hf $HF_PATH $HF_MODEL_NAME
 python test.py --model_type hf --hf_path $HF_PATH --resume --out_name instruct_$HF_MODEL_NAME.json --out_dir data/work_dirs/ --dataset_path data/instruct_v1.json --eval instruct --prompt_type json --model_display_name $HF_MODEL_NAME
 ```
 
+Once you finish all tested samples, a detailed evluation results is shown at `$out_dir/$model_display_name/$model_display_name_-1.json`. To obtain your final score, please run the following command:
+```bash
+python teval/utils/convert_results.py --result_path $RESULT_FILE_PATH
+```
+
 ## 🔌 Protocols
 
 T-Eval adopts multi-conversation style evaluation to gauge the model. The format of our saved prompt is as follows:
