@@ -68,9 +68,10 @@ sh test_all.sh hf $HF_PATH $HF_MODEL_NAME
 python test.py --model_type hf --hf_path $HF_PATH --resume --out_name instruct_$HF_MODEL_NAME.json --out_dir data/work_dirs/ --dataset_path data/instruct_v1.json --eval instruct --prompt_type json --model_display_name $HF_MODEL_NAME
 ```
 
-Once you finish all tested samples, a detailed evluation results is shown at `$out_dir/$model_display_name/$model_display_name_-1.json`. To obtain your final score, please run the following command:
+### 💫 Final Results
+Once you finish all tested samples, a detailed evluation results will be logged at `$out_dir/$model_display_name/$model_display_name_-1.json`. To obtain your final score, please run the following command:
 ```bash
-python teval/utils/convert_results.py --result_path $RESULT_FILE_PATH
+python teval/utils/convert_results.py --result_path $out_dir/$model_display_name/$model_display_name_-1.json
 ```
 
 ## 🔌 Protocols
@@ -114,13 +115,15 @@ More detailed and comprehensive benchmark results can refer to 🏆 [T-Eval offi
 
 ### ✉️ Submit Your Results
 
-You can submit your inference results (via running test.py) to this [email](lovesnow@mail.ustc.edu.cn). We will run your predictions and update the results in our leaderboard. Please also provide the scale of your tested model. A sample structure of your submission should be:
+You can submit your inference results (via running test.py) to this [email](lovesnow@mail.ustc.edu.cn). We will run your predictions and update the results in our leaderboard. Please also provide the scale of your tested model. A sample structure of your submission should be like:
 ```
 $model_display_name/
     instruct_$model_display_name/
         query_0_1_0.json
+        query_0_1_1.json
         ...
     plan_json_$model_display_name/
+    plan_str_$model_display_name/
     ...
 ```
 
