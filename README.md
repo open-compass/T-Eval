@@ -114,7 +114,15 @@ More detailed and comprehensive benchmark results can refer to 🏆 [T-Eval offi
 
 ### ✉️ Submit Your Results
 
-You can submit your inference results (via running test.py) to this [email](lovesnow@mail.ustc.edu.cn). We will run your predictions and update the results in our leaderboard.
+You can submit your inference results (via running test.py) to this [email](lovesnow@mail.ustc.edu.cn). We will run your predictions and update the results in our leaderboard. Please also provide the scale of your tested model. A sample structure of your submission should be:
+```
+$model_display_name/
+    instruct_$model_display_name/
+        query_0_1_0.json
+        ...
+    plan_json_$model_display_name/
+    ...
+```
 
 ## ❤️ Acknowledgements
 
