@@ -69,24 +69,24 @@ if __name__ == '__main__':
     os.makedirs(args.out_dir, exist_ok=True)
     tmp_folder_name = os.path.splitext(args.out_name)[0]
     os.makedirs(os.path.join(args.out_dir, tmp_folder_name), exist_ok=True)
-    # if args.model_type.startswith('gpt'):
-    #     # if you want to use GPT, please refer to lagent for how to pass your key to GPTAPI class
-    #     llm = GPTAPI(args.model_type)
-    # # elif args.model_type.startswith('claude'):
-    # #     llm = ClaudeAPI(args.model_type)
-    # elif args.model_type == 'hf':
-    #     meta_template = meta_template_dict.get(args.meta_template)
-    #     llm = HFTransformerCasualLM(args.hf_path, meta_template=meta_template)
+    if args.model_type.startswith('gpt'):
+        # if you want to use GPT, please refer to lagent for how to pass your key to GPTAPI class
+        llm = GPTAPI(args.model_type)
+    # elif args.model_type.startswith('claude'):
+    #     llm = ClaudeAPI(args.model_type)
+    elif args.model_type == 'hf':
+        meta_template = meta_template_dict.get(args.meta_template)
+        llm = HFTransformerCasualLM(args.hf_path, meta_template=meta_template)
     dataset, tested_num, total_num = load_dataset(args.dataset_path, args.out_dir, args.resume, tmp_folder_name=tmp_folder_name)
     if args.test_num == -1:
         test_num = max(total_num - tested_num, 0)
     else:
         test_num = max(min(args.test_num - tested_num, total_num - tested_num), 0)
     print(f"Tested {tested_num} samples, left {test_num} samples, total {total_num} samples")
-    # prediction = infer(dataset, llm, args.out_dir, tmp_folder_name=tmp_folder_name, test_num=test_num)
+    prediction = infer(dataset, llm, args.out_dir, tmp_folder_name=tmp_folder_name, test_num=test_num)
     # dump prediction to out_dir
     output_file_path = os.path.join(args.out_dir, args.out_name)
-    # mmengine.dump(prediction, os.path.join(args.out_dir, args.out_name))
+    mmengine.dump(prediction, os.path.join(args.out_dir, args.out_name))
 
     if args.eval:
         if args.model_display_name == "":
