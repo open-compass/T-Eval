@@ -1,7 +1,5 @@
 echo "model_type: $1"
 
-number_of_data=-1
-
 if [ -z "$2" ]; then
     hf_path="."
 else
@@ -17,25 +15,25 @@ else
 fi
 
 echo "evaluating instruct ..."
-python test.py --model_type $1 --resume --out_name instruct_$display_name.json --out_dir work_dirs/$display_name/ --dataset_path data/instruct_v1.json --eval instruct --prompt_type json --test_num $number_of_data --hf_path $hf_path --model_display_name $display_name
+python test.py --model_type $1 --resume --out_name instruct_$display_name.json --out_dir work_dirs/$display_name/ --dataset_path data/instruct_v1.json --eval instruct --prompt_type json --hf_path $hf_path --model_display_name $display_name
 
 echo "evaluating review ..."
-python test.py --model_type $1 --resume --out_name review_str_$display_name.json --out_dir work_dirs/$display_name/ --dataset_path data/review_str_v1.json --eval review --prompt_type str --test_num $number_of_data --hf_path $hf_path --model_display_name $display_name
+python test.py --model_type $1 --resume --out_name review_str_$display_name.json --out_dir work_dirs/$display_name/ --dataset_path data/review_str_v1.json --eval review --prompt_type str --hf_path $hf_path --model_display_name $display_name
 
 echo "evaluating plan json ..."
-python test.py --model_type $1 --resume --out_name plan_json_$display_name.json --out_dir work_dirs/$display_name/ --dataset_path data/plan_json_v1.json --eval plan --prompt_type json --test_num $number_of_data --hf_path $hf_path --model_display_name $display_name
+python test.py --model_type $1 --resume --out_name plan_json_$display_name.json --out_dir work_dirs/$display_name/ --dataset_path data/plan_json_v1.json --eval plan --prompt_type json --hf_path $hf_path --model_display_name $display_name
 
 echo "evaluating plan str ..."
-python test.py --model_type $1 --resume --out_name plan_str_$display_name.json --out_dir work_dirs/$display_name/ --dataset_path data/plan_str_v1.json --eval plan --prompt_type str --test_num $number_of_data --hf_path $hf_path --model_display_name $display_name
+python test.py --model_type $1 --resume --out_name plan_str_$display_name.json --out_dir work_dirs/$display_name/ --dataset_path data/plan_str_v1.json --eval plan --prompt_type str --hf_path $hf_path --model_display_name $display_name
 
 echo "evaluating reason str ..."
-python test.py --model_type $1 --resume --out_name reason_str_$display_name.json --out_dir work_dirs/$display_name/ --dataset_path data/reason_str_v1.json --eval reason --prompt_type str --test_num $number_of_data --hf_path $hf_path --model_display_name $display_name
+python test.py --model_type $1 --resume --out_name reason_str_$display_name.json --out_dir work_dirs/$display_name/ --dataset_path data/reason_str_v1.json --eval reason --prompt_type str --hf_path $hf_path --model_display_name $display_name
 
 echo "evaluating retrieve str ..."
-python test.py --model_type $1 --resume --out_name retrieve_str_$display_name.json --out_dir work_dirs/$display_name/ --dataset_path data/retrieve_str_v1.json --eval retrieve --prompt_type str --test_num $number_of_data --hf_path $hf_path --model_display_name $display_name
+python test.py --model_type $1 --resume --out_name retrieve_str_$display_name.json --out_dir work_dirs/$display_name/ --dataset_path data/retrieve_str_v1.json --eval retrieve --prompt_type str --hf_path $hf_path --model_display_name $display_name
 
 echo "evaluating understand str ..."
-python test.py --model_type $1 --resume --out_name understand_str_$display_name.json --out_dir work_dirs/$display_name/ --dataset_path data/understand_str_v1.json --eval understand --prompt_type str --test_num $number_of_data --hf_path $hf_path --model_display_name $display_name
+python test.py --model_type $1 --resume --out_name understand_str_$display_name.json --out_dir work_dirs/$display_name/ --dataset_path data/understand_str_v1.json --eval understand --prompt_type str --hf_path $hf_path --model_display_name $display_name
 
 echo "evaluating RRU (reason, retrieve, understand) json ..."
-python test.py --model_type $1 --resume --out_name reason_retrieve_understand_json_$display_name.json --out_dir work_dirs/$display_name/ --dataset_path data/reason_retrieve_understand_json_v1.json --eval rru --prompt_type json --test_num $number_of_data --hf_path $hf_path --model_display_name $display_name
+python test.py --model_type $1 --resume --out_name reason_retrieve_understand_json_$display_name.json --out_dir work_dirs/$display_name/ --dataset_path data/reason_retrieve_understand_json_v1.json --eval rru --prompt_type json --hf_path $hf_path --model_display_name $display_name
