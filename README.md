@@ -27,8 +27,9 @@ Zehui Chen<sup>&spades;</sup>, Weihua Du<sup>&spades;</sup>, Wenwei Zhang<sup>&s
 
 ## 🚀 What's New
 
-- **[2023.12.22]** Paper available on [Arxiv](https://arxiv.org/abs/2312.14033). 🔥🔥🔥
-- **[2023.12.21]** Release the test scripts and data for T-Eval. 🎉🎉🎉
+- **[2024.01.08]** Release [ZH Leaderboard](https://open-compass.github.io/T-Eval/leaderboard_zh.html) and [ZH data](), where the questions and answer formats are in Chinese. （公布了中文评测数据集和榜单）✨✨✨
+- **[2023.12.22]** Paper available on [ArXiv](https://arxiv.org/abs/2312.14033). 🔥🔥🔥
+- **[2023.12.21]** Release the test scripts and [data]() for T-Eval. 🎉🎉🎉
 
 ## 🛠️ Preparations
 
@@ -41,6 +42,20 @@ $ pip install requirements.txt
 ##  🛫️ Get Started
 
 We support both API-based models and HuggingFace models via [Lagent](https://github.com/InternLM/lagent).
+
+### 💾 Test Data
+
+You can use the following link to access to the test data:
+
+[[EN data](https://drive.google.com/file/d/1ebR6WCCbS9-u2x7mWpWy8wV_Gb6ltgpi/view?usp=sharing)] (English format) [[ZH data](https://drive.google.com/file/d/1z25duwZAnBrPN5jYu9-8RMvfqnwPByKV/view?usp=sharing)] (Chinese format)
+
+After downloading, please put the data in the `data` folder directly:
+```
+- data
+  - instruct_v1.json
+  - plan_json_v1.json
+  ...
+```
 
 ### 🤖 API Models
 
