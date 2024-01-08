@@ -66,7 +66,9 @@ export OPENAI_API_KEY=xxxxxxxxx
 2. Run the model with the following scripts
 ```bash
 # test all data at once
-sh test_all.sh gpt-4-1106-preview
+sh test_all_en.sh gpt-4-1106-preview
+# test ZH dataset
+sh test_all_zh.sh gpt-4-1106-preview
 # test for Instruct only
 python test.py --model_type gpt-4-1106-preview --resume --out_name instruct_gpt-4-1106-preview.json --out_dir data/work_dirs/ --dataset_path data/instruct_v1.json --eval instruct --prompt_type json
 ```
@@ -78,13 +80,15 @@ python test.py --model_type gpt-4-1106-preview --resume --out_name instruct_gpt-
 3. Run the model with the following scripts
 ```bash
 # test all data at once
-sh test_all.sh hf $HF_PATH $HF_MODEL_NAME
+sh test_all_en.sh hf $HF_PATH $HF_MODEL_NAME
+# test ZH dataset
+sh test_all_zh.sh hf $HF_PATH $HF_MODEL_NAME
 # test for Instruct only
 python test.py --model_type hf --hf_path $HF_PATH --resume --out_name instruct_$HF_MODEL_NAME.json --out_dir data/work_dirs/ --dataset_path data/instruct_v1.json --eval instruct --prompt_type json --model_display_name $HF_MODEL_NAME
 ```
 
 ### 💫 Final Results
-Once you finish all tested samples, a detailed evluation results will be logged at `$out_dir/$model_display_name/$model_display_name_-1.json`. To obtain your final score, please run the following command:
+Once you finish all tested samples, a detailed evluation results will be logged at `$out_dir/$model_display_name/$model_display_name_-1.json` (For ZH dataset, there is a `_zh` suffix). To obtain your final score, please run the following command:
 ```bash
 python teval/utils/convert_results.py --result_path $out_dir/$model_display_name/$model_display_name_-1.json
 ```

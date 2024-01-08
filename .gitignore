@@ -122,3 +122,4 @@ outputs
 *.pth
 *.py~
 *.sh~
+data/*.json

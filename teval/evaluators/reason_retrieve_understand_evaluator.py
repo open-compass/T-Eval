@@ -40,12 +40,13 @@ class ReasonRetrieveUnderstandEvaluator:
     def __init__(
         self,
         dataset_path: str,
-        bert_score_model: str = "all-mpnet-base-v2",
+        bert_score_model: str = "all-mpnet-base-v2", # ['thenlper/gte-large-zh', 'all-mpnet-base-v2']
         default_prompt_type: str = 'json',
         eval_type: str = 'reason',
         **kwargs,
     ) -> None:
         self.bert_score_model = bert_score_model
+        print(bert_score_model)
         self.dataset_path = dataset_path
         # self.bertscore = evaluate.load('bertscore')
         self.default_prompt_type = default_prompt_type # ["json", "str"]
