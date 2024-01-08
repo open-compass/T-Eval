@@ -27,7 +27,7 @@ Zehui Chen<sup>&spades;</sup>, Weihua Du<sup>&spades;</sup>, Wenwei Zhang<sup>&s
 
 ## 🚀 What's New
 
-- **[2024.01.08]** Release [ZH Leaderboard](https://open-compass.github.io/T-Eval/leaderboard_zh.html) and [ZH data](), where the questions and answer formats are in Chinese. （公布了中文评测数据集和榜单）✨✨✨
+- **[2024.01.08]** Release [ZH Leaderboard](https://open-compass.github.io/T-Eval/leaderboard_zh.html) and [ZH data](https://drive.google.com/file/d/1z25duwZAnBrPN5jYu9-8RMvfqnwPByKV/view?usp=sharing), where the questions and answer formats are in Chinese. （公布了中文评测数据集和榜单）✨✨✨
 - **[2023.12.22]** Paper available on [ArXiv](https://arxiv.org/abs/2312.14033). 🔥🔥🔥
 - **[2023.12.21]** Release the test scripts and [data]() for T-Eval. 🎉🎉🎉
 
