@@ -94,11 +94,6 @@ if __name__ == '__main__':
         else:
             model_display_name = args.model_display_name
         os.makedirs(args.out_dir, exist_ok=True)
-        json_path = os.path.join(args.out_dir, model_display_name + '_' + str(args.test_num) + '.json')
-        if os.path.exists(json_path):
-            results = mmengine.load(json_path)
-        else:
-            results = dict()
         eval_mapping = dict(
             instruct="InstructEvaluator",
             plan="PlanningEvaluator",
@@ -108,9 +103,18 @@ if __name__ == '__main__':
             understand="ReasonRetrieveUnderstandEvaluator",
             rru="ReasonRetrieveUnderstandEvaluator"
         )
+        if "_zh" in args.dataset_path:
+            bert_score_model = "thenlper/gte-large-zh"
+            json_path = os.path.join(args.out_dir, model_display_name + '_' + str(args.test_num) + '_zh.json')
+        else:
+            bert_score_model = "all-mpnet-base-v2"
+            json_path = os.path.join(args.out_dir, model_display_name + '_' + str(args.test_num) + '.json')
         evaluator_class = getattr(evaluator_factory, eval_mapping[args.eval])
-        evaluator = evaluator_class(output_file_path, default_prompt_type=args.prompt_type, eval_type = args.eval)
-
+        evaluator = evaluator_class(output_file_path, default_prompt_type=args.prompt_type, eval_type = args.eval, bert_score_model=bert_score_model)
+        if os.path.exists(json_path):
+            results = mmengine.load(json_path)
+        else:
+            results = dict()
         eval_results = evaluator.evaluate()
         print(eval_results)
         results[args.eval + '_' + args.prompt_type] = eval_results
