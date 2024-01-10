@@ -18,3 +18,4 @@ LLaMA2-70B,46.3, 58.4, 49.9, 29.8, 38.9, 44.6, 56.1,TRUE,https://ai.meta.com/lla
 WizardLM-70B,44.2, 36.6, 69.8, 48.6, 32.6, 54.5, 23.2,TRUE,https://github.com/nlpxucan/WizardLM
 Qwen-72B,73.5, 97.4, 83.2, 61.8, 70.3, 76.6, 51.3,TRUE,https://github.com/QwenLM/Qwen
 Mistral-7B,56.4, 78.0, 53.8, 40.3, 51.4, 54.6, 60.2,TRUE,https://mistral.ai/news/announcing-mistral-7b/
+Nanbeige-Agent-32B, 74.6, 81.1, 73.6, 64.2, 79.8, 81.5, 67.2, TRUE, https://huggingface.co/Nanbeige
