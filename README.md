@@ -10,6 +10,7 @@ This is an evaluation harness for the benchmark described in [T-Eval: Evaluating
 [[Paper](https://arxiv.org/abs/2312.14033)]
 [[Project Page](https://open-compass.github.io/T-Eval/)]
 [[LeaderBoard](https://open-compass.github.io/T-Eval/leaderboard.html)]
+[[HuggingFace](https://huggingface.co/datasets/lovesnowbest/T-Eval)]
 
 > Large language models (LLM) have achieved remarkable performance on various NLP tasks and are augmented by tools for broader applications. Yet, how to evaluate and analyze the tool utilization capability of LLMs is still under-explored. In contrast to previous works that evaluate models holistically, we comprehensively decompose the tool utilization into multiple sub-processes, including instruction following, planning, reasoning, retrieval, understanding, and review. Based on that, we further introduce T-Eval to evaluate the tool-utilization capability step by step. T-Eval disentangles the tool utilization evaluation into several sub-domains along model capabilities, facilitating the inner understanding of both holistic and isolated competency of LLMs. We conduct extensive experiments on T-Eval and in-depth analysis of various LLMs. T-Eval not only exhibits consistency with the outcome-oriented evaluation but also provides a more fine-grained analysis of the capabilities of LLMs, providing a new perspective in LLM evaluation on tool-utilization ability.
 
@@ -45,13 +46,24 @@ We support both API-based models and HuggingFace models via [Lagent](https://git
 
 ### 💾 Test Data
 
-You can use the following link to access to the test data:
+We provide both google drive & huggingface dataset to download test data:
+
+1. Google Drive
 
 [[EN data](https://drive.google.com/file/d/1ebR6WCCbS9-u2x7mWpWy8wV_Gb6ltgpi/view?usp=sharing)] (English format) [[ZH data](https://drive.google.com/file/d/1z25duwZAnBrPN5jYu9-8RMvfqnwPByKV/view?usp=sharing)] (Chinese format)
 
+2. HuggingFace Datasets
+
+You can also access the dataset through huggingface via this [link](https://huggingface.co/datasets/lovesnowbest/T-Eval).
+
+```python
+from datasets import load_dataset
+dataset = load_dataset("lovesnowbest/T-Eval")
+```
+
 After downloading, please put the data in the `data` folder directly:
 ```
-- data
+- data/
   - instruct_v1.json
   - plan_json_v1.json
   ...
