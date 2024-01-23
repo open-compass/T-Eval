@@ -32,6 +32,16 @@ Zehui Chen<sup>&spades;</sup>, Weihua Du<sup>&spades;</sup>, Wenwei Zhang<sup>&s
 - **[2023.12.22]** Paper available on [ArXiv](https://arxiv.org/abs/2312.14033). 🔥🔥🔥
 - **[2023.12.21]** Release the test scripts and [data]() for T-Eval. 🎉🎉🎉
 
+## 🧾 TODO
+
+- Change the role of function response from `system` to `function`.
+- Merge consecutive same role conversations.
+- Provide template configs for open-sourced models.
+- Provide dev set for T-Eval, reducing the evaluation time.
+- Optimize the inference pipeline of huggingface model provided by Lagent, which will be 3x faster.
+
+> NOTE: These TODOs will be started after 2024.2.1 :) Thanks for your patience~
+
 ## 🛠️ Preparations
 
 ```bash
