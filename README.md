@@ -39,6 +39,7 @@ Zehui Chen<sup>&spades;</sup>, Weihua Du<sup>&spades;</sup>, Wenwei Zhang<sup>&s
 - Provide template configs for open-sourced models.
 - Provide dev set for T-Eval, reducing the evaluation time.
 - Optimize the inference pipeline of huggingface model provided by Lagent, which will be 3x faster.
+- Support inference on Opencompass.
 
 > NOTE: These TODOs will be started after 2024.2.1 :) Thanks for your patience~
 
