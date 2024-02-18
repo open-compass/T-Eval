@@ -14,13 +14,6 @@ This is an evaluation harness for the benchmark described in [T-Eval: Evaluating
 
 > Large language models (LLM) have achieved remarkable performance on various NLP tasks and are augmented by tools for broader applications. Yet, how to evaluate and analyze the tool utilization capability of LLMs is still under-explored. In contrast to previous works that evaluate models holistically, we comprehensively decompose the tool utilization into multiple sub-processes, including instruction following, planning, reasoning, retrieval, understanding, and review. Based on that, we further introduce T-Eval to evaluate the tool-utilization capability step by step. T-Eval disentangles the tool utilization evaluation into several sub-domains along model capabilities, facilitating the inner understanding of both holistic and isolated competency of LLMs. We conduct extensive experiments on T-Eval and in-depth analysis of various LLMs. T-Eval not only exhibits consistency with the outcome-oriented evaluation but also provides a more fine-grained analysis of the capabilities of LLMs, providing a new perspective in LLM evaluation on tool-utilization ability.
 
-<!-- 
-[T-Eval: ]()<br>
-Zehui Chen<sup>&spades;</sup>, Weihua Du<sup>&spades;</sup>, Wenwei Zhang<sup>&spades;</sup>, Kuikun Liu, Jiangning Liu, Miao Zheng, Jingming Zhuo, Songyang Zhang, Dahua Lin, Kai Chen<sup>&diams;</sup>, Feng Zhao<sup>&diams;</sup>
-
-<sup>&spades;</sup> Equal Contribution<br>
-<sup>&diams;</sup> Corresponding Author -->
-
 <div>
 <center>
 <img src="figs/teaser.png">
@@ -28,7 +21,7 @@ Zehui Chen<sup>&spades;</sup>, Weihua Du<sup>&spades;</sup>, Wenwei Zhang<sup>&s
 
 ## 🚀 What's New
 
-- **[2024.02.18]** Release new [data](https://drive.google.com/file/d/1nQ0pn26qd0FGU8UkfSTxNdu6uWI0QXTY/view?usp=sharing) (both Chinese and English) and code for faster inference!🚀🚀🚀 The leaderboard will be updated soon! We also provide template examples for reference.
+- **[2024.02.18]** Release new [data](https://drive.google.com/file/d/1nQ0pn26qd0FGU8UkfSTxNdu6uWI0QXTY/view?usp=sharing) (both Chinese and English) and code for faster inference! 🚀🚀🚀 The leaderboard will be updated soon! We also provide template examples for reference~ The code have been verfied to align the performance reported in the paper.
 - **[2024.01.08]** Release [ZH Leaderboard](https://open-compass.github.io/T-Eval/leaderboard_zh.html) and ~~[ZH data](https://drive.google.com/file/d/1z25duwZAnBrPN5jYu9-8RMvfqnwPByKV/view?usp=sharing)~~, where the questions and answer formats are in Chinese. （公布了中文评测数据集和榜单）✨✨✨
 - **[2023.12.22]** Paper available on [ArXiv](https://arxiv.org/abs/2312.14033). 🔥🔥🔥
 - **[2023.12.21]** Release the test scripts and data for T-Eval. 🎉🎉🎉
@@ -40,9 +33,9 @@ Zehui Chen<sup>&spades;</sup>, Weihua Du<sup>&spades;</sup>, Wenwei Zhang<sup>&s
 - [x] Provide template configs for open-sourced models.
 - [x] Provide dev set for T-Eval, reducing the evaluation time.
 - [x] Optimize the inference pipeline of huggingface model provided by Lagent, which will be 3x faster. **(Please upgrade Lagent to v0.2)**
-- [] Support inference on Opencompass.
+- [ ] Support inference on Opencompass.
 
-> ~~NOTE: These TODOs will be started after 2024.2.1 :) Thanks for your patience~~~
+~~NOTE: These TODOs will be started after 2024.2.1~~ Thanks for your patience!
 
 ## 🛠️ Preparations
 
