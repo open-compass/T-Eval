@@ -1,11 +1,11 @@
-# T-Eval: Evaluating the Tool Utilization Capability Step by Step
+# T-Eval: Evaluating the Tool Utilization Capability of Large Language Models Step by Step
 
 [![arXiv](https://img.shields.io/badge/arXiv-2312.14033-b31b1b.svg)](https://arxiv.org/abs/2312.14033)
 [![license](https://img.shields.io/github/license/InternLM/opencompass.svg)](./LICENSE)
 
 ## ✨ Introduction  
 
-This is an evaluation harness for the benchmark described in [T-Eval: Evaluating the Tool Utilization Capability Step by Step](https://arxiv.org/abs/2312.14033). 
+This is an evaluation harness for the benchmark described in [T-Eval: Evaluating the Tool Utilization Capability of Large Language Models Step by Step](https://arxiv.org/abs/2312.14033). 
 
 [[Paper](https://arxiv.org/abs/2312.14033)]
 [[Project Page](https://open-compass.github.io/T-Eval/)]
@@ -28,20 +28,21 @@ Zehui Chen<sup>&spades;</sup>, Weihua Du<sup>&spades;</sup>, Wenwei Zhang<sup>&s
 
 ## 🚀 What's New
 
-- **[2024.01.08]** Release [ZH Leaderboard](https://open-compass.github.io/T-Eval/leaderboard_zh.html) and [ZH data](https://drive.google.com/file/d/1z25duwZAnBrPN5jYu9-8RMvfqnwPByKV/view?usp=sharing), where the questions and answer formats are in Chinese. （公布了中文评测数据集和榜单）✨✨✨
+- **[2024.02.18]** Release new [data](https://drive.google.com/file/d/1nQ0pn26qd0FGU8UkfSTxNdu6uWI0QXTY/view?usp=sharing) (both Chinese and English) and code for faster inference!🚀🚀🚀 The leaderboard will be updated soon! We also provide template examples for reference.
+- **[2024.01.08]** Release [ZH Leaderboard](https://open-compass.github.io/T-Eval/leaderboard_zh.html) and ~~[ZH data](https://drive.google.com/file/d/1z25duwZAnBrPN5jYu9-8RMvfqnwPByKV/view?usp=sharing)~~, where the questions and answer formats are in Chinese. （公布了中文评测数据集和榜单）✨✨✨
 - **[2023.12.22]** Paper available on [ArXiv](https://arxiv.org/abs/2312.14033). 🔥🔥🔥
-- **[2023.12.21]** Release the test scripts and [data]() for T-Eval. 🎉🎉🎉
+- **[2023.12.21]** Release the test scripts and data for T-Eval. 🎉🎉🎉
 
 ## 🧾 TODO
 
-- Change the role of function response from `system` to `function`.
-- Merge consecutive same role conversations.
-- Provide template configs for open-sourced models.
-- Provide dev set for T-Eval, reducing the evaluation time.
-- Optimize the inference pipeline of huggingface model provided by Lagent, which will be 3x faster.
-- Support inference on Opencompass.
+- [x] Change the role of function response from `system` to `function`.
+- [x] Merge consecutive same role conversations.
+- [x] Provide template configs for open-sourced models.
+- [x] Provide dev set for T-Eval, reducing the evaluation time.
+- [x] Optimize the inference pipeline of huggingface model provided by Lagent, which will be 3x faster. **(Please upgrade Lagent to v0.2)**
+- [] Support inference on Opencompass.
 
-> NOTE: These TODOs will be started after 2024.2.1 :) Thanks for your patience~
+> ~~NOTE: These TODOs will be started after 2024.2.1 :) Thanks for your patience~~~
 
 ## 🛠️ Preparations
 
@@ -61,7 +62,8 @@ We provide both google drive & huggingface dataset to download test data:
 
 1. Google Drive
 
-[[EN data](https://drive.google.com/file/d/1ebR6WCCbS9-u2x7mWpWy8wV_Gb6ltgpi/view?usp=sharing)] (English format) [[ZH data](https://drive.google.com/file/d/1z25duwZAnBrPN5jYu9-8RMvfqnwPByKV/view?usp=sharing)] (Chinese format)
+~~[[EN data](https://drive.google.com/file/d/1ebR6WCCbS9-u2x7mWpWy8wV_Gb6ltgpi/view?usp=sharing)] (English format) [[ZH data](https://drive.google.com/file/d/1z25duwZAnBrPN5jYu9-8RMvfqnwPByKV/view?usp=sharing)] (Chinese format)~~
+[T-Eval Data](https://drive.google.com/file/d/1nQ0pn26qd0FGU8UkfSTxNdu6uWI0QXTY/view?usp=sharing)
 
 2. HuggingFace Datasets
 
@@ -75,8 +77,8 @@ dataset = load_dataset("lovesnowbest/T-Eval")
 After downloading, please put the data in the `data` folder directly:
 ```
 - data/
-  - instruct_v1.json
-  - plan_json_v1.json
+  - instruct_v2.json
+  - plan_json_v2.json
   ...
 ```
 
@@ -89,11 +91,11 @@ export OPENAI_API_KEY=xxxxxxxxx
 2. Run the model with the following scripts
 ```bash
 # test all data at once
-sh test_all_en.sh gpt-4-1106-preview
+sh test_all_en.sh api gpt-4-1106-preview gpt4
 # test ZH dataset
-sh test_all_zh.sh gpt-4-1106-preview
+sh test_all_zh.sh api gpt-4-1106-preview gpt4
 # test for Instruct only
-python test.py --model_type gpt-4-1106-preview --resume --out_name instruct_gpt-4-1106-preview.json --out_dir data/work_dirs/ --dataset_path data/instruct_v1.json --eval instruct --prompt_type json
+python test.py --model_type api --model_path gpt-4-1106-preview --resume --out_name instruct_gpt4.json --out_dir work_dirs/gpt4/ --dataset_path data/instruct_v2.json --eval instruct --prompt_type json
 ```
 
 ### 🤗 HuggingFace Models
@@ -103,11 +105,11 @@ python test.py --model_type gpt-4-1106-preview --resume --out_name instruct_gpt-
 3. Run the model with the following scripts
 ```bash
 # test all data at once
-sh test_all_en.sh hf $HF_PATH $HF_MODEL_NAME
+sh test_all_en.sh hf $HF_PATH $HF_MODEL_NAME $META_TEMPLATE
 # test ZH dataset
-sh test_all_zh.sh hf $HF_PATH $HF_MODEL_NAME
+sh test_all_zh.sh hf $HF_PATH $HF_MODEL_NAME $META_TEMPLATE
 # test for Instruct only
-python test.py --model_type hf --hf_path $HF_PATH --resume --out_name instruct_$HF_MODEL_NAME.json --out_dir data/work_dirs/ --dataset_path data/instruct_v1.json --eval instruct --prompt_type json --model_display_name $HF_MODEL_NAME
+python test.py --model_type hf --model_path $HF_PATH --resume --out_name instruct_$HF_MODEL_NAME.json --out_dir data/work_dirs/ --dataset_path data/instruct_v1.json --eval instruct --prompt_type json --model_display_name $HF_MODEL_NAME --meta_template $META_TEMPLATE
 ```
 
 ### 💫 Final Results
@@ -131,7 +133,7 @@ T-Eval adopts multi-conversation style evaluation to gauge the model. The format
     }
 ]
 ```
-where `role` can be ['system', 'user', 'assistant'], and `content` must be in string format. Before infering it by a LLM, we need to construct it into a raw string format via `meta_template`. A `meta_template` sample for InternLM is provided at [meta_template.py](teval/utils/meta_template.py):
+where `role` can be ['system', 'user', 'assistant'], and `content` must be in string format. Before infering it by a LLM, we need to construct it into a raw string format via `meta_template`. `meta_template` examples are provided at [meta_template.py](teval/utils/meta_template.py):
 ```python
 [
     dict(role='system', begin='<|System|>:', end='\n'),
