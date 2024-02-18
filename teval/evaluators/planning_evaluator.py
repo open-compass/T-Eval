@@ -32,7 +32,7 @@ class PlanningEvaluator:
         dataset_path: str,
         name_weight = 0.75,
         args_weight = 0.25,
-        match_threshold = 0.7,
+        match_threshold = 0.8,
         match_strategy: str = 'bertscore', # ["bertscore", "permutation"]
         bert_score_model: str = "all-mpnet-base-v2", # ['thenlper/gte-large-zh', 'all-mpnet-base-v2']
         default_prompt_type: str = 'json', # ["json", "ReWOO"]

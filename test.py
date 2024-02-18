@@ -1,6 +1,6 @@
 import teval.evaluators as evaluator_factory
 from teval.utils.meta_template import meta_template_dict
-from lagent.llms.huggingface import HFTransformerCasualLM
+from lagent.llms.huggingface import HFTransformerCasualLM, HFTransformerChat
 from lagent.llms.openai import GPTAPI
 import argparse
 import mmengine
@@ -12,18 +12,19 @@ import random
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('--dataset_path', type=str, default='data/instruct_v1.json')
-    parser.add_argument('--model_type', type=str, choices=['gpt-3.5-turbo-16k', 'gpt-4-1106-preview', 'hf', 'claude-2.1', 'chat-bison-001'], default='gpt-3.5-turbo-16k')
+    parser.add_argument('--model_type', type=str, choices=['api', 'hf'], default='hf')
     # hf means huggingface, if you want to use huggingface model, you should specify the path of the model
     parser.add_argument('--model_display_name', type=str, default="")
     # if not set, it will be the same as the model type, only inference the output_name of the result
     parser.add_argument('--resume', action='store_true')
     parser.add_argument('--out_name', type=str, default='tmp.json')
     parser.add_argument('--out_dir', type=str, default="work_dirs/")
-    parser.add_argument('--hf_path', type=str, help="path to huggingface model")
+    # [api model name: 'gpt-3.5-turbo-16k', 'gpt-4-1106-preview', 'claude-2.1', 'chat-bison-001']
+    parser.add_argument('--model_path', type=str, help="path to huggingface model / api model name")
     parser.add_argument('--eval', type=str, choices=['instruct', 'reason', 'plan', 'retrieve', 'review', 'understand', 'rru'])
     parser.add_argument('--test_num', type=int, default=-1, help='number of samples to test, -1 means all')
     parser.add_argument('--prompt_type', type=str, default='json', choices=['json', 'str'])
-    parser.add_argument('--meta_template', type=str, default='internlm')
+    parser.add_argument('--meta_template', type=str, default='qwen')
     args = parser.parse_args()
     return args
 
@@ -45,6 +46,22 @@ def load_dataset(dataset_path, out_dir, is_resume=False, tmp_folder_name='tmp'):
 
     return dataset, tested_num, total_num
 
+def split_special_tokens(text):
+    text = text.split('<eoa>')[0]
+    text = text.split('<TOKENS_UNUSED_1>')[0]
+    text = text.split('<|im_end|>')[0]
+    text = text.split('\nuser')[0]
+    text = text.split('\nassistant')[0]
+    text = text.split('\nUSER')[0]
+    text = text.split('[INST]')[0]
+    text = text.split('<|user|>')[0]
+    text = text.strip()
+    if text.startswith('```json'):
+        text = text[len('```json'):]
+    text = text.strip('`').strip()
+    return text
+
+
 def infer(dataset, llm, out_dir, tmp_folder_name='tmp', test_num = -1):
     random_list = list(dataset.keys())
     random.shuffle(random_list)
@@ -53,7 +70,8 @@ def infer(dataset, llm, out_dir, tmp_folder_name='tmp', test_num = -1):
             break
         test_num -= 1
         prompt = dataset[idx]['origin_prompt']
-        prediction = llm.generate_from_template(prompt, 1024)
+        prediction = llm.chat(prompt)
+        prediction = split_special_tokens(prediction)
         dataset[idx]['prediction'] = prediction
         mmengine.dump(dataset[idx], os.path.join(out_dir, tmp_folder_name, f'{idx}.json'))
     # load results from cache
@@ -69,24 +87,28 @@ if __name__ == '__main__':
     os.makedirs(args.out_dir, exist_ok=True)
     tmp_folder_name = os.path.splitext(args.out_name)[0]
     os.makedirs(os.path.join(args.out_dir, tmp_folder_name), exist_ok=True)
-    if args.model_type.startswith('gpt'):
-        # if you want to use GPT, please refer to lagent for how to pass your key to GPTAPI class
-        llm = GPTAPI(args.model_type)
-    # elif args.model_type.startswith('claude'):
-    #     llm = ClaudeAPI(args.model_type)
-    elif args.model_type == 'hf':
-        meta_template = meta_template_dict.get(args.meta_template)
-        llm = HFTransformerCasualLM(args.hf_path, meta_template=meta_template)
     dataset, tested_num, total_num = load_dataset(args.dataset_path, args.out_dir, args.resume, tmp_folder_name=tmp_folder_name)
     if args.test_num == -1:
         test_num = max(total_num - tested_num, 0)
     else:
         test_num = max(min(args.test_num - tested_num, total_num - tested_num), 0)
-    print(f"Tested {tested_num} samples, left {test_num} samples, total {total_num} samples")
-    prediction = infer(dataset, llm, args.out_dir, tmp_folder_name=tmp_folder_name, test_num=test_num)
-    # dump prediction to out_dir
     output_file_path = os.path.join(args.out_dir, args.out_name)
-    mmengine.dump(prediction, os.path.join(args.out_dir, args.out_name))
+    if test_num != 0:
+        if args.model_type == 'api':
+            # if you want to use GPT, please refer to lagent for how to pass your key to GPTAPI class
+            llm = GPTAPI(args.model_path)
+        # elif args.model_type.startswith('claude'):
+        #     llm = ClaudeAPI(args.model_type)
+        elif args.model_type == 'hf':
+            meta_template = meta_template_dict.get(args.meta_template)
+            if "chatglm" in args.model_display_name:
+                llm = HFTransformerChat(path=args.model_path, meta_template=meta_template)
+            else:
+                llm = HFTransformerCasualLM(path=args.model_path, meta_template=meta_template, max_new_tokens=512)
+        print(f"Tested {tested_num} samples, left {test_num} samples, total {total_num} samples")
+        prediction = infer(dataset, llm, args.out_dir, tmp_folder_name=tmp_folder_name, test_num=test_num)
+        # dump prediction to out_dir
+        mmengine.dump(prediction, os.path.join(args.out_dir, args.out_name))
 
     if args.eval:
         if args.model_display_name == "":
