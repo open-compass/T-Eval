@@ -43,6 +43,8 @@ This is an evaluation harness for the benchmark described in [T-Eval: Evaluating
 $ git clone https://github.com/open-compass/T-Eval.git
 $ cd T-Eval
 $ pip install requirements.txt
+$ git clone https://github.com/InternLM/lagent.git
+$ cd lagent && pip install -e .
 ```
 
 ##  🛫️ Get Started
