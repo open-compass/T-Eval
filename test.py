@@ -71,6 +71,9 @@ def infer(dataset, llm, out_dir, tmp_folder_name='tmp', test_num = -1):
         test_num -= 1
         prompt = dataset[idx]['origin_prompt']
         prediction = llm.chat(prompt)
+        if not isinstance(prediction, str):
+            print("Warning: the output of llm is not a string, force to convert it into str")
+            prediction = str(prediction)
         prediction = split_special_tokens(prediction)
         dataset[idx]['prediction'] = prediction
         mmengine.dump(dataset[idx], os.path.join(out_dir, tmp_folder_name, f'{idx}.json'))
