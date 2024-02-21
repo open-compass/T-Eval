@@ -27,7 +27,6 @@ meta_template_dict = dict(
                 begin='\n<|im_start|>assistant\n',
                 end='<|im_end|>',
                 generate=True),
-
     ],
     vicuna = [
         dict(role='user', begin='user: ', end='\n'),

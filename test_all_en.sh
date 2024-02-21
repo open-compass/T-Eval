@@ -1,3 +1,4 @@
+export CUDA_VISIBLE_DEVICES=1
 echo "model_type: $1"
 
 model_path=$2
