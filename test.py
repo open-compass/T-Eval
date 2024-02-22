@@ -25,6 +25,7 @@ def parse_args():
     parser.add_argument('--test_num', type=int, default=-1, help='number of samples to test, -1 means all')
     parser.add_argument('--prompt_type', type=str, default='json', choices=['json', 'str'])
     parser.add_argument('--meta_template', type=str, default='qwen')
+    parser.add_argument('--batch_size', type=int, default=1)
     args = parser.parse_args()
     return args
 
@@ -61,22 +62,26 @@ def split_special_tokens(text):
     text = text.strip('`').strip()
     return text
 
-
-def infer(dataset, llm, out_dir, tmp_folder_name='tmp', test_num = -1):
-    random_list = list(dataset.keys())
-    random.shuffle(random_list)
+def infer(dataset, llm, out_dir, tmp_folder_name='tmp', test_num = 1, batch_size=1):
+    random_list = list(dataset.keys())[:test_num]
+    batch_infer_list = []; batch_infer_ids = []
     for idx in tqdm(random_list):
-        if test_num == 0:
-            break
-        test_num -= 1
         prompt = dataset[idx]['origin_prompt']
-        prediction = llm.chat(prompt)
-        if not isinstance(prediction, str):
-            print("Warning: the output of llm is not a string, force to convert it into str")
-            prediction = str(prediction)
-        prediction = split_special_tokens(prediction)
-        dataset[idx]['prediction'] = prediction
-        mmengine.dump(dataset[idx], os.path.join(out_dir, tmp_folder_name, f'{idx}.json'))
+        batch_infer_list.append(prompt)
+        batch_infer_ids.append(idx)
+        # batch inference
+        if len(batch_infer_ids) == batch_size or idx == len(random_list) - 1:
+            predictions = llm.chat(batch_infer_list, do_sample=False)
+            for ptr, prediction in enumerate(predictions):
+                if not isinstance(prediction, str):
+                    print("Warning: the output of llm is not a string, force to convert it into str")
+                    prediction = str(prediction)
+                prediction = split_special_tokens(prediction)
+                data_ptr = batch_infer_ids[ptr]
+                dataset[data_ptr]['prediction'] = prediction
+                mmengine.dump(dataset[data_ptr], os.path.join(out_dir, tmp_folder_name, f'{data_ptr}.json'))
+            batch_infer_ids = []; batch_infer_list = []
+        
     # load results from cache
     results = dict()
     file_list = os.listdir(os.path.join(out_dir, tmp_folder_name))
@@ -109,7 +114,7 @@ if __name__ == '__main__':
             else:
                 llm = HFTransformerCasualLM(path=args.model_path, meta_template=meta_template, max_new_tokens=512)
         print(f"Tested {tested_num} samples, left {test_num} samples, total {total_num} samples")
-        prediction = infer(dataset, llm, args.out_dir, tmp_folder_name=tmp_folder_name, test_num=test_num)
+        prediction = infer(dataset, llm, args.out_dir, tmp_folder_name=tmp_folder_name, test_num=test_num, batch_size=args.batch_size)
         # dump prediction to out_dir
         mmengine.dump(prediction, os.path.join(args.out_dir, args.out_name))
 

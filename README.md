@@ -21,13 +21,14 @@ This is an evaluation harness for the benchmark described in [T-Eval: Evaluating
 
 ## 🚀 What's New
 
-- **[2024.02.18]** Release new [data](https://drive.google.com/file/d/1nQ0pn26qd0FGU8UkfSTxNdu6uWI0QXTY/view?usp=sharing) (both Chinese and English) and code for faster inference! 🚀🚀🚀 The leaderboard will be updated soon! We also provide template examples for reference~ The code have been verfied to align the performance reported in the paper.
+- **[2024.02.22]** Release new [data](https://drive.google.com/file/d/1AqFOV7mVnVMy7gr3DyryHtIAPVarIITw/view?usp=sharing) and [1/5 subset](https://drive.google.com/file/d/1DgCMjquEIJ2v14Xu6uB6w3UEzaYXZbUL/view?usp=sharing)(both Chinese and English) and code for faster inference! 🚀🚀🚀 The leaderboard will be updated soon! We also provide template examples for reference~
 - **[2024.01.08]** Release [ZH Leaderboard](https://open-compass.github.io/T-Eval/leaderboard_zh.html) and ~~[ZH data](https://drive.google.com/file/d/1z25duwZAnBrPN5jYu9-8RMvfqnwPByKV/view?usp=sharing)~~, where the questions and answer formats are in Chinese. （公布了中文评测数据集和榜单）✨✨✨
 - **[2023.12.22]** Paper available on [ArXiv](https://arxiv.org/abs/2312.14033). 🔥🔥🔥
 - **[2023.12.21]** Release the test scripts and data for T-Eval. 🎉🎉🎉
 
 ## 🧾 TODO
 
+- [x] Support Batch Inference. NOTE: Some models (ChatGLM, Qwen, InternV1) does not support batch inference.
 - [x] Change the role of function response from `system` to `function`.
 - [x] Merge consecutive same role conversations.
 - [x] Provide template configs for open-sourced models.
