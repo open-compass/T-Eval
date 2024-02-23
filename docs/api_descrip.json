@@ -1,0 +1,1235 @@
+[
+    {
+        "name": "AirbnbSearch",
+        "tool_description": "Search information from airbnb Short-term rental and housing informationoutside China",
+        "api_list": [
+            {
+                "name": "search_property_by_place",
+                "description": "This function takes various parameters to search properties on Airbnb.",
+                "required_parameters": [
+                    {
+                        "name": "place",
+                        "type": "STRING",
+                        "description": "The name of the destination."
+                    }
+                ],
+                "optional_parameters": [],
+                "return_data": [
+                    {
+                        "name": "property",
+                        "description": "a list of at most 3 properties, containing id, name, and address."
+                    }
+                ]
+            },
+            {
+                "name": "get_property_details",
+                "description": "This function retrieves the details of a property given its ID.",
+                "required_parameters": [
+                    {
+                        "name": "propertyId",
+                        "type": "NUMBER",
+                        "description": "The ID of the property."
+                    }
+                ],
+                "optional_parameters": [],
+                "return_data": [
+                    {
+                        "name": "title",
+                        "description": "The title of the property."
+                    },
+                    {
+                        "name": "propertyType",
+                        "description": "The type of the property."
+                    },
+                    {
+                        "name": "personCapacity",
+                        "description": "The capacity of the property."
+                    },
+                    {
+                        "name": "rating",
+                        "description": "The rating of the property."
+                    },
+                    {
+                        "name": "latitude",
+                        "description": "The latitude of the property."
+                    },
+                    {
+                        "name": "longitude",
+                        "description": "The longitude of the property."
+                    }
+                ]
+            },
+            {
+                "name": "check_availability",
+                "description": "This function checks the availability of a property given its ID.",
+                "required_parameters": [
+                    {
+                        "name": "propertyId",
+                        "type": "NUMBER",
+                        "description": "The ID of the property."
+                    }
+                ],
+                "optional_parameters": [
+                    {
+                        "name": "date",
+                        "type": "STRING",
+                        "description": "The date to check, it must in the format of YYYY-MM-DD."
+                    }
+                ],
+                "return_data": [
+                    {
+                        "name": "availability",
+                        "description": "The availability of the property for the given date or the next 10 days."
+                    }
+                ]
+            },
+            {
+                "name": "get_property_reviews",
+                "description": "This function retrieves the reviews of a property given its ID.",
+                "required_parameters": [
+                    {
+                        "name": "propertyId",
+                        "type": "NUMBER",
+                        "description": "The ID of the property."
+                    }
+                ],
+                "optional_parameters": [],
+                "return_data": [
+                    {
+                        "name": "reviews",
+                        "description": "The reviews of the property, containing comment, rating, and date. At most 3 reviews are returned."
+                    }
+                ]
+            },
+            {
+                "name": "get_property_checkout_price",
+                "description": "This function retrieves the checkout cost of a property given its ID and check-in date.",
+                "required_parameters": [
+                    {
+                        "name": "propertyId",
+                        "type": "NUMBER",
+                        "description": "The ID of the property."
+                    },
+                    {
+                        "name": "checkIn",
+                        "type": "STRING",
+                        "description": "The check-in date, it must in the format of YYYY-MM-DD."
+                    },
+                    {
+                        "name": "checkOut",
+                        "type": "STRING",
+                        "description": "The check-in date, it must in the format of YYYY-MM-DD."
+                    }
+                ],
+                "optional_parameters": [],
+                "return_data": [
+                    {
+                        "name": "accommodationCost",
+                        "description": "The accommodation cost of the property."
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "ArxivSearch",
+        "tool_description": "Search information from Arxiv.org Useful for when you need to answer questions about Physics, Mathematics, Computer Science, Quantitative Biology, Quantitative Finance, Statistics, Electrical Engineering, and Economics from scientific articles on arxiv.org",
+        "api_list": [
+            {
+                "name": "get_arxiv_article_information",
+                "description": "Run Arxiv search and get the article meta information.",
+                "required_parameters": [
+                    {
+                        "name": "query",
+                        "type": "STRING",
+                        "description": "the content of search query"
+                    }
+                ],
+                "optional_parameters": [],
+                "return_data": [
+                    {
+                        "name": "content",
+                        "description": "a list of 3 arxiv search papers, including published date, title, authors, and summary"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "BINGMap",
+        "tool_description": "Plugin for look up map information in American",
+        "api_list": [
+            {
+                "name": "get_distance",
+                "description": "Get the distance between two locations in km.",
+                "required_parameters": [
+                    {
+                        "name": "start",
+                        "type": "STRING",
+                        "description": "The start location."
+                    },
+                    {
+                        "name": "end",
+                        "type": "STRING",
+                        "description": "The end location."
+                    }
+                ],
+                "optional_parameters": [],
+                "return_data": [
+                    {
+                        "name": "distance",
+                        "description": "the distance in km."
+                    }
+                ]
+            },
+            {
+                "name": "get_route",
+                "description": "Get the route between two locations in km.",
+                "required_parameters": [
+                    {
+                        "name": "start",
+                        "type": "STRING",
+                        "description": "The start location."
+                    },
+                    {
+                        "name": "end",
+                        "type": "STRING",
+                        "description": "The end location."
+                    }
+                ],
+                "optional_parameters": [],
+                "return_data": [
+                    {
+                        "name": "route",
+                        "description": "the route, a list of actions."
+                    }
+                ]
+            },
+            {
+                "name": "get_coordinates",
+                "description": "Get the coordinates of a location.",
+                "required_parameters": [
+                    {
+                        "name": "location",
+                        "type": "STRING",
+                        "description": "the location need to get coordinates."
+                    }
+                ],
+                "optional_parameters": [],
+                "return_data": [
+                    {
+                        "name": "latitude",
+                        "description": "the latitude of the location."
+                    },
+                    {
+                        "name": "longitude",
+                        "description": "the longitude of the location."
+                    }
+                ]
+            },
+            {
+                "name": "search_nearby",
+                "description": "Search for places nearby a location, within a given radius, and return the results into a list. Put the location name at the end of the query.",
+                "required_parameters": [
+                    {
+                        "name": "search_term",
+                        "type": "STRING",
+                        "description": "the place name"
+                    }
+                ],
+                "optional_parameters": [
+                    {
+                        "name": "places",
+                        "type": "STRING",
+                        "description": "the name of the location."
+                    },
+                    {
+                        "name": "latitude",
+                        "type": "FLOAT",
+                        "description": "the latitude of the location."
+                    },
+                    {
+                        "name": "longitude",
+                        "type": "FLOAT",
+                        "description": "the longitude of the location."
+                    },
+                    {
+                        "name": "radius",
+                        "type": "NUMBER",
+                        "description": "radius in meters."
+                    }
+                ],
+                "return_data": [
+                    {
+                        "name": "places",
+                        "description": "the list of places, each place is a dict with name and address, at most 5 places."
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Email",
+        "tool_description": "Plugin for email operation",
+        "api_list": [
+            {
+                "name": "send",
+                "description": "send email",
+                "required_parameters": [
+                    {
+                        "name": "address",
+                        "description": "the email address to send",
+                        "type": "STRING"
+                    },
+                    {
+                        "name": "title",
+                        "description": "title of email, not NULL",
+                        "type": "STRING"
+                    }
+                ],
+                "optional_parameters": [
+                    {
+                        "name": "body",
+                        "description": "the content of the email",
+                        "type": "STRING"
+                    },
+                    {
+                        "name": "attachment",
+                        "description": "path of the attachment file",
+                        "type": "STRING"
+                    }
+                ],
+                "return_data": [
+                    {
+                        "name": "state",
+                        "description": "the state of sending email"
+                    }
+                ]
+            },
+            {
+                "name": "show",
+                "description": "show the emails in the inbox",
+                "required_parameters": [
+                    {
+                        "name": "only_unread",
+                        "description": "whether to show only unread emails in the inbox",
+                        "type": "BOOLEAN"
+                    }
+                ],
+                "optional_parameters": [],
+                "return_data": [
+                    {
+                        "name": "emails",
+                        "descriptions": "a list of emails in the inbox including sender, title, content, and time"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "FileOperation",
+        "tool_description": "Plugin for operating files",
+        "api_list": [
+            {
+                "name": "write_file",
+                "description": "write file to disk",
+                "required_parameters": [
+                    {
+                        "name": "file_path",
+                        "type": "STRING",
+                        "description": "The path of the file."
+                    },
+                    {
+                        "name": "text",
+                        "type": "STRING",
+                        "description": "The text needed to write."
+                    }
+                ],
+                "optional_parameters": [],
+                "return_data": [
+                    {
+                        "name": "status",
+                        "description": "the status of the operation."
+                    }
+                ]
+            },
+            {
+                "name": "read_file",
+                "description": "read file from disk",
+                "required_parameters": [
+                    {
+                        "name": "file_path",
+                        "type": "STRING",
+                        "description": "The path of the file."
+                    }
+                ],
+                "optional_parameters": [],
+                "return_data": [
+                    {
+                        "name": "text",
+                        "description": "the text of the file."
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "FilmDouban",
+        "tool_description": "Search movie information from douban providedUseful for when you need to find information about current movies and upcoming movies in China",
+        "api_list": [
+            {
+                "name": "coming_out_filter",
+                "description": "prints the details of the filtered [outNum] coming films in China",
+                "required_parameters": [],
+                "optional_parameters": [
+                    {
+                        "name": "region",
+                        "type": "STRING",
+                        "description": "the region of search query, and the parameter must in Chinese."
+                    },
+                    {
+                        "name": "cate",
+                        "type": "STRING",
+                        "description": "the category of search query, and the parameter must in Chinese."
+                    },
+                    {
+                        "name": "outNum",
+                        "type": "NUMBER",
+                        "description": "the number of search query"
+                    }
+                ],
+                "return_data": [
+                    {
+                        "name": "film",
+                        "description": "a list of film information, including date, title, cate, region, wantWatchPeopleNum, link"
+                    }
+                ]
+            },
+            {
+                "name": "now_playing_out_filter",
+                "description": "prints the details of the filtered [outNum] playing films now in China",
+                "required_parameters": [],
+                "optional_parameters": [
+                    {
+                        "name": "region",
+                        "type": "STRING",
+                        "description": "the region of search query, and the parameter must in Chinese."
+                    },
+                    {
+                        "name": "outNum",
+                        "type": "NUMBER",
+                        "description": "the number of search query"
+                    }
+                ],
+                "return_data": [
+                    {
+                        "name": "film",
+                        "description": "a list of film information, including date, title, cate, region, wantWatchPeopleNum, link"
+                    }
+                ]
+            },
+            {
+                "name": "print_detail",
+                "description": "prints the details of a movie, giving its name",
+                "required_parameters": [
+                    {
+                        "name": "film_name",
+                        "type": "STRING",
+                        "description": "target movie's name, must be in Chinese"
+                    }
+                ],
+                "optional_parameters": [],
+                "return_data": [
+                    {
+                        "name": "description",
+                        "description": "the description of the movie"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "FilmTMDB",
+        "tool_description": "Plugin for look up films at TMDB",
+        "api_list": [
+            {
+                "name": "search_movie",
+                "description": "Search for movies by their original, translated and alternative titles",
+                "required_parameters": [
+                    {
+                        "name": "query",
+                        "type": "STRING",
+                        "description": "the title of the movie"
+                    }
+                ],
+                "optional_parameters": [],
+                "return_data": [
+                    {
+                        "name": "id",
+                        "description": "movie ID of the searched movie"
+                    },
+                    {
+                        "name": "title",
+                        "description": ""
+                    }
+                ]
+            },
+            {
+                "name": "get_movie_details",
+                "description": "Get the top level details of a movie by ID",
+                "required_parameters": [
+                    {
+                        "name": "movie_id",
+                        "type": "NUMBER",
+                        "description": "','"
+                    }
+                ],
+                "optional_parameters": [],
+                "return_data": [
+                    {
+                        "name": "genres",
+                        "description": "category list of film"
+                    },
+                    {
+                        "name": "id",
+                        "description": ""
+                    },
+                    {
+                        "name": "release_date",
+                        "description": ""
+                    },
+                    {
+                        "name": "runtime",
+                        "description": "film length in minute"
+                    },
+                    {
+                        "name": "title",
+                        "description": ""
+                    },
+                    {
+                        "name": "overview",
+                        "description": ""
+                    },
+                    {
+                        "name": "vote_average",
+                        "description": "rating for the film"
+                    },
+                    {
+                        "name": "popularity",
+                        "description": ""
+                    }
+                ]
+            },
+            {
+                "name": "get_similar_movies",
+                "description": "Get the similar movies based on genres and keywords",
+                "required_parameters": [
+                    {
+                        "name": "movie_id",
+                        "type": "NUMBER",
+                        "description": "','"
+                    }
+                ],
+                "optional_parameters": [],
+                "return_data": [
+                    {
+                        "name": "films",
+                        "description": "list of reviews including user's name, rating, and reviews"
+                    }
+                ]
+            },
+            {
+                "name": "get_movie_reviews",
+                "description": "Get the user reviews for a movie",
+                "required_parameters": [
+                    {
+                        "name": "movie_id",
+                        "type": "NUMBER",
+                        "description": "','"
+                    }
+                ],
+                "optional_parameters": [],
+                "return_data": [
+                    {
+                        "name": "reviews",
+                        "description": "list of reviews including user's name, rating, and reviews"
+                    }
+                ]
+            },
+            {
+                "name": "get_now_playing",
+                "description": "Get a list of movies that are currently in theatres",
+                "required_parameters": [],
+                "optional_parameters": [],
+                "return_data": [
+                    {
+                        "name": "films",
+                        "description": "list of films playing, including id, title, release date, popularity and rating"
+                    }
+                ]
+            },
+            {
+                "name": "get_top_rated_movies",
+                "description": "Get a list of movies ordered by rating",
+                "required_parameters": [],
+                "optional_parameters": [],
+                "return_data": [
+                    {
+                        "name": "films",
+                        "description": "list of films ranked by rating, including id, title, release date, popularity and rating"
+                    }
+                ]
+            },
+            {
+                "name": "get_popular_movies",
+                "description": "Get a list of movies ordered by popularity",
+                "required_parameters": [],
+                "optional_parameters": [],
+                "return_data": [
+                    {
+                        "name": "films",
+                        "description": "list of films ranked by popularity, including id, title, release date, popularity and rating"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "GaodeMap",
+        "tool_description": "Plugin for look up map information only in China",
+        "api_list": [
+            {
+                "name": "get_distance",
+                "description": "Get the distance between two locations in km.",
+                "required_parameters": [
+                    {
+                        "name": "origins",
+                        "type": "STRING",
+                        "description": "coordinate of the start location, format with 'lon,lat'"
+                    },
+                    {
+                        "name": "destination",
+                        "type": "STRING",
+                        "description": "coordinate of the end location, format with 'lon,lat'"
+                    }
+                ],
+                "optional_parameters": [],
+                "return_data": [
+                    {
+                        "name": "distance",
+                        "description": "the distance in KM"
+                    },
+                    {
+                        "name": "duration",
+                        "description": "expected time in minutes"
+                    }
+                ]
+            },
+            {
+                "name": "get_route",
+                "description": "Get the route between two locations in km.",
+                "required_parameters": [
+                    {
+                        "name": "origin",
+                        "type": "STRING",
+                        "description": "coordinate of the start location, format with 'lon,lat'"
+                    },
+                    {
+                        "name": "destination",
+                        "type": "STRING",
+                        "description": "coordinate of the end location, format with 'lon,lat'"
+                    }
+                ],
+                "optional_parameters": [],
+                "return_data": [
+                    {
+                        "name": "route",
+                        "description": "the route, a list of actions."
+                    }
+                ]
+            },
+            {
+                "name": "get_coordinate",
+                "description": "Get the coordinate of a location. Param must be in Chinese",
+                "required_parameters": [
+                    {
+                        "name": "address",
+                        "type": "STRING",
+                        "description": "the location need to get coordinates."
+                    }
+                ],
+                "optional_parameters": [
+                    {
+                        "name": "city",
+                        "type": "STRING",
+                        "description": "specify the city to search"
+                    }
+                ],
+                "return_data": [
+                    {
+                        "name": "coordinate",
+                        "description": "coordinate of the location, format with (lon, lat)"
+                    }
+                ]
+            },
+            {
+                "name": "search_nearby",
+                "description": "Search for places nearby a location, within a given radius, and return the results into a list. Put the location name at the end of the query.",
+                "required_parameters": [
+                    {
+                        "name": "location",
+                        "type": "STRING",
+                        "description": "The coordinate of the location, format with 'lon,lat'"
+                    },
+                    {
+                        "name": "keywords",
+                        "type": "STRING",
+                        "description": "The search type, e.g., restaurant, school"
+                    }
+                ],
+                "optional_parameters": [],
+                "return_data": [
+                    {
+                        "name": "places",
+                        "description": "the list of places, each place is a dict with name and address, at most 5 places."
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "GoogleScholar",
+        "tool_description": "Plugin for google scholar search",
+        "api_list": [
+            {
+                "name": "search_google_scholar",
+                "description": "Search for scholarly articles on Google Scholar",
+                "required_parameters": [
+                    {
+                        "name": "query",
+                        "description": "search query content",
+                        "type": "STRING"
+                    }
+                ],
+                "optional_parameters": [],
+                "return_data": [
+                    {
+                        "name": "title",
+                        "description": "list of the titles of papers"
+                    },
+                    {
+                        "name": "cited_by",
+                        "description": "citation number of papers"
+                    },
+                    {
+                        "name": "organic_id",
+                        "description": "list of organic results' ids of the papers"
+                    },
+                    {
+                        "name": "snipets",
+                        "description": "snippets of the papers"
+                    },
+                    {
+                        "name": "pub_info",
+                        "description": "publication information of selected papers"
+                    }
+                ]
+            },
+            {
+                "name": "get_author_information",
+                "description": "Search for an author's information by author's id provided by get_author_id.",
+                "required_parameters": [
+                    {
+                        "name": "author_id",
+                        "type": "STRING",
+                        "description": "unique ID of the author"
+                    }
+                ],
+                "optional_parameters": [],
+                "return_data": [
+                    {
+                        "name": "name",
+                        "description": "author name"
+                    },
+                    {
+                        "name": "affliation",
+                        "description": "affliation of the author"
+                    },
+                    {
+                        "name": "articles",
+                        "description": "at most 3 articles by the author"
+                    },
+                    {
+                        "name": "website",
+                        "description": "the authors's homepage url"
+                    }
+                ]
+            },
+            {
+                "name": "get_citation_format",
+                "description": "get MLA citation format by an identification of organic result's id",
+                "required_parameters": [
+                    {
+                        "name": "q",
+                        "type": "STRING",
+                        "description": "ID of an individual Google Scholar organic search result"
+                    }
+                ],
+                "optional_parameters": [],
+                "return_data": [
+                    {
+                        "name": "citation",
+                        "description": "the citation format of the article"
+                    }
+                ]
+            },
+            {
+                "name": "get_author_id",
+                "description": "The getAuthorId function is used to get the author's id by his or her name.",
+                "required_parameters": [
+                    {
+                        "name": "mauthors",
+                        "description": "the name of the author",
+                        "type": "STRING"
+                    }
+                ],
+                "optional_parameters": [],
+                "return_data": [
+                    {
+                        "name": "author_id",
+                        "description": "the author_id of the author"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "GoogleSearch",
+        "tool_description": "A google search tool using serper search API",
+        "api_list": [
+            {
+                "name": "serper_search",
+                "description": "A google search API. You can use it when you want to get answer about specific `questions.",
+                "required_parameters": [
+                    {
+                        "name": "query",
+                        "type": "STRING",
+                        "description": "the content of search query"
+                    }
+                ],
+                "optional_parameters": [],
+                "return_data": [
+                    {
+                        "name": "content",
+                        "description": "at most 3 items of google search results"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "ReserveMeeting",
+        "tool_description": "plugin for booking meeting, with rooms 101, 102, 103",
+        "api_list": [
+            {
+                "name": "get_room_status",
+                "description": "get the room booking status",
+                "required_parameters": [],
+                "optional_parameters": [],
+                "return_data": [
+                    {
+                        "name": "rooms",
+                        "description": "list of rooms as well as its booking status"
+                    }
+                ]
+            },
+            {
+                "name": "get_empty_room_with_time",
+                "description": "if they are any rooms available in the provided time",
+                "required_parameters": [
+                    {
+                        "name": "start_time",
+                        "description": "the start booked time, must be in 24 hour format, e.g. 13:15",
+                        "type": "STRING"
+                    },
+                    {
+                        "name": "end_time",
+                        "description": "the end booked time, must be in 24 hour format, e.g. 22:21",
+                        "type": "STRING"
+                    }
+                ],
+                "optional_parameters": [],
+                "return_data": [
+                    {
+                        "name": "rooms",
+                        "description": "list of available room ids"
+                    }
+                ]
+            },
+            {
+                "name": "reserve",
+                "description": "Book the meeting room today using the room id provided by `check_empty`",
+                "required_parameters": [
+                    {
+                        "name": "room_id",
+                        "description": "the room you want to book",
+                        "type": "STRING"
+                    },
+                    {
+                        "name": "start_time",
+                        "description": "the start booked time, must be in 24 hour format, e.g. 13:15",
+                        "type": "STRING"
+                    },
+                    {
+                        "name": "end_time",
+                        "description": "the end booked time, must be in 24 hour format, e.g. 22:21",
+                        "type": "STRING"
+                    }
+                ],
+                "optional_parameters": [],
+                "return_data": [
+                    {
+                        "name": "state",
+                        "description": "the state of the booking"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "TimeTool",
+        "tool_description": "get time information from system",
+        "api_list": [
+            {
+                "name": "get_curr_time",
+                "description": "get current time",
+                "required_parameters": [],
+                "optional_parameters": [],
+                "return_data": [
+                    {
+                        "name": "time",
+                        "description": "the time in YYYY-MM-DD HH:MM format"
+                    }
+                ]
+            },
+            {
+                "name": "get_weekday",
+                "description": "get the weekday today",
+                "required_parameters": [],
+                "optional_parameters": [],
+                "return_data": [
+                    {
+                        "name": "weekday",
+                        "description": ""
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "PPT",
+        "tool_description": "create ppt slides with text, paragraph, images, with good looking styles",
+        "api_list": [
+            {
+                "name": "create_file",
+                "description": "Create a pptx file with specific themes",
+                "required_parameters": [
+                    {
+                        "name": "theme",
+                        "type": "STRING",
+                        "description": "the theme used"
+                    },
+                    {
+                        "name": "abs_location",
+                        "type": "STRING",
+                        "description": "the ppt file's absolute saving location"
+                    }
+                ],
+                "optional_parameters": [],
+                "return_data": [
+                    {
+                        "name": "status",
+                        "description": "the result of the execution"
+                    }
+                ]
+            },
+            {
+                "name": "get_image",
+                "description": "Get an image given keywords from Internet, return the image path",
+                "required_parameters": [
+                    {
+                        "name": "keywords",
+                        "type": "STRING",
+                        "description": "the comma separated keywords to describe the image"
+                    }
+                ],
+                "optional_parameters": [],
+                "return_data": [
+                    {
+                        "name": "picture_url",
+                        "description": "the file path to the searched image"
+                    }
+                ]
+            },
+            {
+                "name": "add_text_page",
+                "description": "Add text page of ppt",
+                "required_parameters": [
+                    {
+                        "name": "title",
+                        "type": "STRING",
+                        "description": "the title of the page"
+                    },
+                    {
+                        "name": "bullet_items",
+                        "type": "STRING",
+                        "description": "bullet_items should be string, for multiple bullet items, please use [SPAN] to separate them."
+                    }
+                ],
+                "optional_parameters": [],
+                "return_data": [
+                    {
+                        "name": "status",
+                        "description": "the result of the execution"
+                    }
+                ]
+            },
+            {
+                "name": "add_text_image_page",
+                "description": "Add a text page with one image. Image should be a path",
+                "required_parameters": [
+                    {
+                        "name": "title",
+                        "type": "STRING",
+                        "description": "the title of the page"
+                    },
+                    {
+                        "name": "bullet_items",
+                        "type": "STRING",
+                        "description": "bullet_items should be string, for multiple bullet items, please use [SPAN] to separate them."
+                    },
+                    {
+                        "name": "image",
+                        "type": "STRING",
+                        "description": "the path of the image"
+                    }
+                ],
+                "optional_parameters": [],
+                "return_data": [
+                    {
+                        "name": "status",
+                        "description": "the result of the execution"
+                    }
+                ]
+            },
+            {
+                "name": "save_file",
+                "description": "When all steps done, YOU MUST use save_file() to save PPT",
+                "required_parameters": [],
+                "optional_parameters": [],
+                "return_data": [
+                    {
+                        "name": "status",
+                        "description": "the result of the execution"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Weather",
+        "tool_description": "look up weather information in at most 3 days",
+        "api_list": [
+            {
+                "name": "get_weather_today",
+                "description": "get today's weather",
+                "required_parameters": [
+                    {
+                        "name": "location",
+                        "description": "the location name",
+                        "type": "STRING"
+                    }
+                ],
+                "optional_parameters": [],
+                "return_data": [
+                    {
+                        "name": "overall",
+                        "description": ""
+                    },
+                    {
+                        "name": "avg temperature",
+                        "description": ""
+                    }
+                ]
+            },
+            {
+                "name": "forecast_weather",
+                "description": "forecast weather in the N upcoming days",
+                "required_parameters": [
+                    {
+                        "name": "location",
+                        "description": "",
+                        "type": "STRING"
+                    },
+                    {
+                        "name": "days",
+                        "description": "the N number of days later, maximum N is 3",
+                        "type": "NUMBER"
+                    }
+                ],
+                "optional_parameters": [],
+                "return_data": [
+                    {
+                        "name": "results",
+                        "description": "list weather forecast of N days, including date, overall weather and temperature"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "PolygonFinance",
+        "tool_description": "polygon.io stocks API tools",
+        "api_list": [
+            {
+                "name": "search_stock_ticker",
+                "description": "get the stock ticker given the company name",
+                "required_parameters": [
+                    {
+                        "name": "search",
+                        "type": "STRING",
+                        "description": "search for terms within the ticker and/or company name"
+                    }
+                ],
+                "optional_parameters": [],
+                "return_data": [
+                    {
+                        "name": "ticker",
+                        "description": "The exchange symbol that this item is traded under"
+                    },
+                    {
+                        "name": "name",
+                        "description": "The name of the asset"
+                    }
+                ]
+            },
+            {
+                "name": "aggregate_stock_with_time",
+                "description": "get aggregate bars for a stock over a given date range in custom time window sizes",
+                "required_parameters": [
+                    {
+                        "name": "ticker",
+                        "type": "STRING",
+                        "description": "The ticker symbol of the stock/equity"
+                    },
+                    {
+                        "name": "multiplier",
+                        "type": "NUMBER",
+                        "description": "The size of the timespan multiplier"
+                    },
+                    {
+                        "name": "timespan",
+                        "type": "STRING",
+                        "description": "The size of the time window, supported 'day', 'hour', 'week'"
+                    },
+                    {
+                        "name": "from",
+                        "type": "STRING",
+                        "description": "The start of the aggregate time window with the format YYYY-MM-DD"
+                    },
+                    {
+                        "name": "to",
+                        "type": "STRING",
+                        "description": "The end of the aggregate time window with the format YYYY-MM-DD"
+                    }
+                ],
+                "optional_parameters": [],
+                "return_data": [
+                    {
+                        "name": "results",
+                        "description": "list of dict including the open and closed price in the given time period and the unix msec timestamp for the start of the aggregate window"
+                    }
+                ]
+            },
+            {
+                "name": "get_daliy_open_close",
+                "description": "get the open, close and afterhours prices of a stock symbol on a certain date",
+                "required_parameters": [
+                    {
+                        "name": "ticker",
+                        "type": "STRING",
+                        "description": "The exchange symbol that this item is traded under"
+                    },
+                    {
+                        "name": "date",
+                        "type": "STRING",
+                        "description": "The date of the requested open/close in the format YYYY-MM-DD"
+                    }
+                ],
+                "optional_parameters": [],
+                "return_data": [
+                    {
+                        "name": "close",
+                        "description": ""
+                    },
+                    {
+                        "name": "open",
+                        "description": ""
+                    }
+                ]
+            },
+            {
+                "name": "get_ticker_news",
+                "description": "get the most recent news articles relating to a stock ticker symbol",
+                "required_parameters": [],
+                "optional_parameters": [
+                    {
+                        "name": "ticker",
+                        "type": "STRING",
+                        "description": "Return results that contain this ticker"
+                    }
+                ],
+                "return_data": [
+                    {
+                        "name": "results",
+                        "description": "A list of news including title, summary, and author"
+                    }
+                ]
+            },
+            {
+                "name": "get_ticker_detail",
+                "description": "Get a single ticker supported by Polygon.io, with detailed information about the ticker and the company behind it",
+                "required_parameters": [
+                    {
+                        "name": "ticker",
+                        "type": "STRING",
+                        "description": ""
+                    }
+                ],
+                "optional_parameters": [],
+                "return_data": [
+                    {
+                        "name": "address",
+                        "description": "company address"
+                    },
+                    {
+                        "name": "homepage_url",
+                        "description": ""
+                    },
+                    {
+                        "name": "description",
+                        "description": "A description of the company and what they do/offer"
+                    },
+                    {
+                        "name": "list_date",
+                        "description": "The date that the symbol was first publicly listed"
+                    },
+                    {
+                        "name": "name",
+                        "description": "The name of the asset"
+                    }
+                ]
+            }
+        ]
+    }
+]
