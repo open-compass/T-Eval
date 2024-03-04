@@ -7,8 +7,12 @@ echo "load model from: $model_path"
 display_name=$3
 echo "Model display name: $display_name"
 
-meta_template=$4
-echo "Meta Template: $meta_template"
+if [ -z "$4" ]; then
+    meta_template=$4
+else
+    meta_template=""
+fi
+echo "Model meta_template: $meta_template"
 
 echo "evaluating instruct ..."
 python test.py --model_type $1 --resume --out_name instruct_$display_name.json --out_dir work_dirs/$display_name/ --dataset_path data/instruct_v2_subset.json --eval instruct --prompt_type json --model_path $model_path --model_display_name $display_name --meta_template $meta_template
