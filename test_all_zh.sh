@@ -9,7 +9,7 @@ echo "Model display name: $display_name"
 if [ -z "$4" ]; then
     meta_template=$4
 else
-    meta_template=""
+    meta_template="nan"
 fi
 echo "Model meta_template: $meta_template"
 
