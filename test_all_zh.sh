@@ -7,9 +7,9 @@ display_name=$3
 echo "Model display name: $display_name"
 
 if [ -z "$4" ]; then
-    meta_template=$4
-else
     meta_template="nan"
+else
+    meta_template=$4
 fi
 echo "Model meta_template: $meta_template"
 
