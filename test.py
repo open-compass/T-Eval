@@ -1,18 +1,21 @@
+import argparse
+import os
+import random
+import shutil
+
+import mmengine
 import teval.evaluators as evaluator_factory
-from teval.utils.meta_template import meta_template_dict
 from lagent.llms.huggingface import HFTransformerCasualLM, HFTransformerChat
 from lagent.llms.openai import GPTAPI
-import argparse
-import mmengine
-import os
+from lagent.llms.vllm_wrapper import VllmModel
+from teval.utils.meta_template import meta_template_dict
 from tqdm import tqdm
-import shutil
-import random
+
 
 def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument('--dataset_path', type=str, default='data/instruct_v1.json')
-    parser.add_argument('--model_type', type=str, choices=['api', 'hf'], default='hf')
+    parser.add_argument('--model_type', type=str, choices=['api', 'hf', 'vllm'], default='hf')
     # hf means huggingface, if you want to use huggingface model, you should specify the path of the model
     parser.add_argument('--model_display_name', type=str, default="")
     # if not set, it will be the same as the model type, only inference the output_name of the result
@@ -81,7 +84,7 @@ def infer(dataset, llm, out_dir, tmp_folder_name='tmp', test_num = 1, batch_size
                 dataset[data_ptr]['prediction'] = prediction
                 mmengine.dump(dataset[data_ptr], os.path.join(out_dir, tmp_folder_name, f'{data_ptr}.json'))
             batch_infer_ids = []; batch_infer_list = []
-        
+
     # load results from cache
     results = dict()
     file_list = os.listdir(os.path.join(out_dir, tmp_folder_name))
@@ -89,7 +92,7 @@ def infer(dataset, llm, out_dir, tmp_folder_name='tmp', test_num = 1, batch_size
         file_id = filename.split('.')[0]
         results[file_id] = mmengine.load(os.path.join(out_dir, tmp_folder_name, filename))
     return results
-    
+
 if __name__ == '__main__':
     args = parse_args()
     os.makedirs(args.out_dir, exist_ok=True)
@@ -113,6 +116,10 @@ if __name__ == '__main__':
                 llm = HFTransformerChat(path=args.model_path, meta_template=meta_template)
             else:
                 llm = HFTransformerCasualLM(path=args.model_path, meta_template=meta_template, max_new_tokens=512)
+        elif args.model_type == "vllm":
+            llm = VllmModel(path=args.model_path, meta_template=None, max_new_tokens=512, top_k=1)
+        else:
+            raise ValueError
         print(f"Tested {tested_num} samples, left {test_num} samples, total {total_num} samples")
         prediction = infer(dataset, llm, args.out_dir, tmp_folder_name=tmp_folder_name, test_num=test_num, batch_size=args.batch_size)
         # dump prediction to out_dir
