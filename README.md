@@ -48,11 +48,6 @@ $ git clone https://github.com/InternLM/lagent.git
 $ cd lagent && pip install -e .
 ```
 
-If you wish to use `lagent`'s integration with [vllm](https://github.com/vllm-project/vllm), run
-```bash
-pip install vllm
-```
-
 ##  🛫️ Get Started
 
 We support both API-based models and HuggingFace models via [Lagent](https://github.com/InternLM/lagent).
