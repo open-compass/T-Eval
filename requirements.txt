@@ -4,3 +4,4 @@ bert_score
 sentence_transformers
 evaluate
 transformers==4.31.0
+vllm

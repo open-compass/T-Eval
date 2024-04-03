@@ -3,9 +3,9 @@
 [![arXiv](https://img.shields.io/badge/arXiv-2312.14033-b31b1b.svg)](https://arxiv.org/abs/2312.14033)
 [![license](https://img.shields.io/github/license/InternLM/opencompass.svg)](./LICENSE)
 
-## ✨ Introduction  
+## ✨ Introduction
 
-This is an evaluation harness for the benchmark described in [T-Eval: Evaluating the Tool Utilization Capability of Large Language Models Step by Step](https://arxiv.org/abs/2312.14033). 
+This is an evaluation harness for the benchmark described in [T-Eval: Evaluating the Tool Utilization Capability of Large Language Models Step by Step](https://arxiv.org/abs/2312.14033).
 
 [[Paper](https://arxiv.org/abs/2312.14033)]
 [[Project Page](https://open-compass.github.io/T-Eval/)]
